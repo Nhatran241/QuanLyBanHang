@@ -16,8 +16,9 @@ namespace DuLich.BanHang_Entity
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-
         public virtual Product Product { get; set; }
+        [Required]
+        public int Product_Amount { get; set; }
         public virtual Combo Combo { get; set; }
     }
 }

@@ -32,23 +32,22 @@ namespace DuLich.GUI.QuanLyThietBi
             {
                 // Create new
                 tmpProduct.CreateTime = DateTime.Now;
-
+                tmpProduct.Price = 0;
+                tmpProduct.DiscountPercent = 0;
+                tmpProduct.Catalog = catalogs.FirstOrDefault();
+                tmpProduct.Amount = 0;
             }
-            else
+            foreach (Catalog catalog in catalogs)
             {
-                tb_tenthietbi.Text = tmpProduct.Product_Name;
-                tb_soluong.Text = tmpProduct.Amount.ToString();
-                tb_gia.Text = tmpProduct.Price.ToString();
-                tb_giamgia.Text = tmpProduct.DiscountPercent.ToString();
-                tb_giasaugiam.Text = (tmpProduct.Price - (tmpProduct.Price * tmpProduct.DiscountPercent) / 100).ToString();
-                tb_chitiet.Text = tmpProduct.Detail;
-                foreach(Catalog catalog in catalogs)
-                {
-                    cb_danhmuc.Items.Add(catalog);
-                }
-                cb_danhmuc.SelectedItem = tmpProduct.Catalog;
-
+                cb_danhmuc.Items.Add(catalog);
             }
+            tb_tenthietbi.Text = tmpProduct.Product_Name;
+            tb_soluong.Text = tmpProduct.Amount.ToString();
+            tb_gia.Text = tmpProduct.Price.ToString();
+            tb_giamgia.Text = tmpProduct.DiscountPercent.ToString();
+            tb_chitiet.Text = tmpProduct.Detail;
+            cb_danhmuc.SelectedItem = tmpProduct.Catalog;
+            updateGiaSauGiam();
         }
 
         private void btn_luu_Click(object sender, EventArgs e)
@@ -59,7 +58,7 @@ namespace DuLich.GUI.QuanLyThietBi
                 chiTietThietBiListener.onLuuClick(product);
             }else
             {
-                MessageBox.Show("Giá trị không hợp lệ");
+                MessageBox.Show("Tên thiết bị không được bỏ trống");
             }
         }
 
@@ -69,6 +68,8 @@ namespace DuLich.GUI.QuanLyThietBi
         }
         private bool Validation(Product product)
         {
+            if (string.IsNullOrEmpty(product.Product_Name) || product.Catalog == null)
+                return false;
             return true;
         }
 
@@ -77,13 +78,6 @@ namespace DuLich.GUI.QuanLyThietBi
 
         }
 
-        private void tb_giatri_KeyPress_1(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-            {
-                e.Handled = true;
-            }
-        }
         public interface IChiTietThietBiListener
         {
             void onLuuClick(Product product);
@@ -92,7 +86,7 @@ namespace DuLich.GUI.QuanLyThietBi
 
         private void tb_tenthietbi_TextChanged(object sender, EventArgs e)
         {
-
+            tmpProduct.Product_Name = tb_tenthietbi.Text.Trim();
         }
 
         private void cb_danhmuc_SelectedIndexChanged(object sender, EventArgs e)
@@ -107,46 +101,57 @@ namespace DuLich.GUI.QuanLyThietBi
 
         private void tb_gia_TextChanged(object sender, EventArgs e)
         {
-            string nodotnod = tb_gia.Text.ToString().Replace(".", "").Replace("đ", "");
+            string nodotnod = tb_gia.Text.ToString().Replace(",", "").Replace("đ", "");
             string number = numberOnly(nodotnod);
-            if (nodotnod != number)
-                tb_gia.Text = string.Format("{0:n0}", number);
-            if (nodotnod.Length > 0)
+            if (number.Length > 0)
             {
-               tmpProduct.Price = long.Parse(nodotnod);
-             
+                tb_gia.Text = long.Parse(number).ToString("N0") + "đ";
+                tb_gia.Focus();
+                tb_gia.SelectionStart = tb_gia.Text.Length - 1;
+                tmpProduct.Price = long.Parse(number);
+
             }
             else
             {
                 tb_gia.Text = "0đ";
+                tmpProduct.Price = 0;
             }
             updateGiaSauGiam();
         }
 
         private void updateGiaSauGiam()
         {
-            tb_giasaugiam.Text = (tmpProduct.Price - (tmpProduct.Price * tmpProduct.DiscountPercent) / 100).ToString();
+            tb_giasaugiam.Text = tmpProduct.PriceAfterDiscount().ToString("N0")+"đ";
         }
 
         private void tb_giamgia_TextChanged(object sender, EventArgs e)
         {
-            string nodotnod = tb_giamgia.Text.ToString().Replace(".", "").Replace("đ", "");
+            string nodotnod = tb_giamgia.Text.ToString().Replace("%", "");
             string number = numberOnly(nodotnod);
-            if (nodotnod != number)
-                tb_giamgia.Text = string.Format("{0:n0}", number);
-            if (nodotnod.Length > 0)
+            if (number.Length > 0)
             {
-                int percent = int.Parse(nodotnod);
-                if (percent > 100)
+                int percent = int.Parse(number);
+                if (percent >= 100)
                 {
-                    tb_giamgia.Text = "100";
+                    tb_giamgia.Text = "100%";
+                    tb_giamgia.Focus();
+                    tb_giamgia.SelectionStart = tb_giamgia.Text.Length - 1;
+                    tmpProduct.DiscountPercent = 100;
                 }
-                else  
-                    tmpProduct.Price = percent;
+                else
+                {
+                    tb_giamgia.Text = percent + "%";
+                    tb_giamgia.Focus();
+                    tb_giamgia.SelectionStart = tb_giamgia.Text.Length - 1;
+                    tmpProduct.DiscountPercent = percent;
+                }
             }
             else
             {
-                tb_giamgia.Text = "0";
+                tb_giamgia.Text = "0%";
+                tb_giamgia.Focus();
+                tb_giamgia.SelectionStart = tb_giamgia.Text.Length - 1;
+                tmpProduct.DiscountPercent = 0;
             }
             updateGiaSauGiam();
         }

@@ -108,6 +108,18 @@
     <Compile Include="GUI\QuanLyChiPhi\DanhSachChiPhi.Designer.cs">
       <DependentUpon>DanhSachChiPhi.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\QuanLyCombo\DanhSachCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\QuanLyCombo\DanhSachCombo.Designer.cs">
+      <DependentUpon>DanhSachCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\QuanLyCombo\TimKiemCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\QuanLyCombo\TimKiemCombo.Designer.cs">
+      <DependentUpon>TimKiemCombo.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\QuanLyDoan\ChiTietDoan.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -278,6 +290,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\QuanLyChiPhi\DanhSachChiPhi.resx">
       <DependentUpon>DanhSachChiPhi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\QuanLyCombo\DanhSachCombo.resx">
+      <DependentUpon>DanhSachCombo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\QuanLyCombo\TimKiemCombo.resx">
+      <DependentUpon>TimKiemCombo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\QuanLyDiaDiem\ChiTietDiaDiem.resx">
       <DependentUpon>ChiTietDiaDiem.cs</DependentUpon>

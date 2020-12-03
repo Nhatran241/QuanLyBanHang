@@ -32,5 +32,17 @@ namespace DuLich.BanHang_Entity
 
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
         public virtual ICollection<ComboProduct> ComboProducts { get; set; }
+
+
+        public void Map(Combo combo)
+        {
+            this.ID = combo.ID;
+            this.Combo_Name = combo.Combo_Name;
+            this.ComboProducts = combo.ComboProducts;
+            this.discountPercent = combo.discountPercent;
+            this.endDate = combo.endDate;
+            this.InvoiceDetails = combo.InvoiceDetails;
+            this.startDate = combo.startDate;
+        }
     }
 }

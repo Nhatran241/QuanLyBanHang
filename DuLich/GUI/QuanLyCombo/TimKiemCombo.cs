@@ -5,9 +5,9 @@ using System.Windows.Forms;
 using DuLich.BanHang_Entity;
 using DuLich.BUS;
 
-namespace DuLich.GUI.QuanLyThietBi
+namespace DuLich.GUI.QuanLyCombo
 {
-    public partial class TimKiemThietBi : UserControl
+    public partial class TimKiemCombo : UserControl
     {
         private List<Catalog> catalogs = new List<Catalog>();
         private Catalog filterCatalog = new Catalog();
@@ -19,7 +19,7 @@ namespace DuLich.GUI.QuanLyThietBi
         private ITimKiemThietBiListener timKiemThietBiListener;
         private bool initDataCompleted = false;
 
-        public TimKiemThietBi()
+        public TimKiemCombo()
         {
             InitializeComponent();
         }

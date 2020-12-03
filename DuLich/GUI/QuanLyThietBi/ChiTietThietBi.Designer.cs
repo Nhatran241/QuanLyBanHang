@@ -76,7 +76,6 @@ namespace DuLich.GUI.QuanLyThietBi
             this.tb_tenthietbi.Size = new System.Drawing.Size(263, 26);
             this.tb_tenthietbi.TabIndex = 5;
             this.tb_tenthietbi.TextChanged += new System.EventHandler(this.tb_tenthietbi_TextChanged);
-            this.tb_tenthietbi.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_giatri_KeyPress_1);
             // 
             // btn_luu
             // 
@@ -154,6 +153,7 @@ namespace DuLich.GUI.QuanLyThietBi
             this.tb_soluong.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_soluong.Location = new System.Drawing.Point(126, 75);
             this.tb_soluong.Name = "tb_soluong";
+            this.tb_soluong.ReadOnly = true;
             this.tb_soluong.Size = new System.Drawing.Size(263, 26);
             this.tb_soluong.TabIndex = 15;
             this.tb_soluong.TextChanged += new System.EventHandler(this.tb_soluong_TextChanged);
@@ -172,7 +172,7 @@ namespace DuLich.GUI.QuanLyThietBi
             // 
             this.tb_giamgia.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_giamgia.Location = new System.Drawing.Point(126, 145);
-            this.tb_giamgia.MaxLength = 3;
+            this.tb_giamgia.MaxLength = 4;
             this.tb_giamgia.Name = "tb_giamgia";
             this.tb_giamgia.Size = new System.Drawing.Size(263, 26);
             this.tb_giamgia.TabIndex = 17;

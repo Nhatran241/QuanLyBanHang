@@ -7,21 +7,20 @@ using DuLich.BanHang_Entity;
 using DuLich.BUS;
 using DuLich.GUI.QuanLyTouris;
 
-namespace DuLich.GUI.QuanLyThietBi
+namespace DuLich.GUI.QuanLyCombo
 {
 
-    public partial class DanhSachThietBi : UserControl,TimKiemThietBi.ITimKiemThietBiListener
+    public partial class DanhSachCombo : UserControl,TimKiemCombo.ITimKiemThietBiListener
     {
         private IDanhSachThietBiListener danhSachThietBiListener;
-        private IDanhSachThietBiChonThietBiListener chonThietBiListener;
         private List<Product> product_list;
         private List<Catalog> catalog_list;
 
-        public DanhSachThietBi()
+        public DanhSachCombo()
         {
             InitializeComponent();
         }
-        public DanhSachThietBi(List<Product> _products_list, List<Catalog> _catalog_list, IDanhSachThietBiListener danhSachThietBiListener)
+        public DanhSachCombo(List<Product> _products_list, List<Catalog> _catalog_list, IDanhSachThietBiListener danhSachThietBiListener)
         {
             InitializeComponent();
             this.danhSachThietBiListener = danhSachThietBiListener;
@@ -29,24 +28,9 @@ namespace DuLich.GUI.QuanLyThietBi
             this.catalog_list = _catalog_list;
             InitData();
         }
-        public DanhSachThietBi(List<Product> _products_list, List<Catalog> _catalog_list, IDanhSachThietBiChonThietBiListener chonThietBiListener)
-        {
-            InitializeComponent();
-            this.chonThietBiListener = chonThietBiListener;
-            this.product_list = _products_list;
-            this.catalog_list = _catalog_list;
-            InitData();
-        }
 
         private void InitData()
         {
-            if(danhSachThietBiListener == null && chonThietBiListener != null)
-            {
-                btn_them.Visible = false;
-                btn_xoa.Visible = false;
-            }
-
-
             DateTime ngaytu = product_list.First().CreateTime;
             DateTime ngayden = product_list.First().CreateTime;
             long giatu = product_list.First().Price;
@@ -99,15 +83,11 @@ namespace DuLich.GUI.QuanLyThietBi
             }
         }
 
-        public interface IDanhSachThietBiListener
+        public interface IDanhSachComboListener
         {
-            void onDanhSachThietBi_DoubleClick(Product product);
+            void onDanhSachCombo_SuaClick(Combo combo);
             void onDanhSachThietBi_ThemClick();
             void onDanhSachThietBi_XoaClick(Product product);
-        }
-        public interface IDanhSachThietBiChonThietBiListener
-        {
-            void onDanhSachThietBi_DoubleClick(Product product);
         }
 
 
@@ -172,10 +152,7 @@ namespace DuLich.GUI.QuanLyThietBi
             if (lv_product.SelectedItems.Count <= 0)
                 return;
             int position = lv_product.SelectedItems[0].Index;
-            if(danhSachThietBiListener != null)
-                danhSachThietBiListener.onDanhSachThietBi_DoubleClick(product_list.ToList()[position]);
-            if(chonThietBiListener !=null)
-                chonThietBiListener.onDanhSachThietBi_DoubleClick(product_list.ToList()[position]);
+            danhSachThietBiListener.onDanhSachThietBi_DoubleClick(product_list.ToList()[position]);
 
         }
     }
