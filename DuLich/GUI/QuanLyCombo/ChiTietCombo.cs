@@ -41,7 +41,6 @@ namespace DuLich.GUI.QuanLyCombo
 
         private void loadListProductInCombo()
         {
-            if (comboProducts.Count > 0) {
                 lv_productincombo.Items.Clear();
                 foreach(ComboProduct comboProduct in comboProducts)
                 {
@@ -54,15 +53,13 @@ namespace DuLich.GUI.QuanLyCombo
                 }, -1);
                     lv_productincombo.Items.Add(item);
                 }
-              
-            }
-            updateGiaSauGiam();
+                updateGiaSauGiam();
 
         }
 
         private void btn_luu_Click(object sender, EventArgs e)
         {
-            if (tmpCombo.ComboProducts == null || tmpCombo.ComboProducts.Count == 0) {
+            if (comboProducts.Count == 0) {
                 MessageBox.Show("Vui lòng thêm ít nhất 1 sản phẩm vào combo");
                 return;            
             }
@@ -96,17 +93,13 @@ namespace DuLich.GUI.QuanLyCombo
 
         private void updateGiaSauGiam()
         {
-            if(tmpCombo.ComboProducts !=null && tmpCombo.ComboProducts.Count > 0)
-            {
-                long tongia = 0;
-                foreach(ComboProduct comboProduct in tmpCombo.ComboProducts)
+            long tongia = 0;
+            foreach(ComboProduct comboProduct in comboProducts)
                 {
                     tongia += comboProduct.Product.Price * comboProduct.Product_Amount;
                 }
-
-                tb_giacombo.Text = tongia.ToString("N0") + "đ";
-
-            }
+                tb_tonggiasanpham.Text = tongia.ToString("N0") + "đ";
+                tb_giacombo.Text = (tongia-(tongia*tmpCombo.discountPercent)/100).ToString("N0") + "đ";
         }
 
         private void tb_giamgia_TextChanged(object sender, EventArgs e)
@@ -175,7 +168,7 @@ namespace DuLich.GUI.QuanLyCombo
             DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn xóa thiết bị "+ comboProduct.Product.Product_Name +" ra khỏi combo này không","", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                comboProducts.Remove(comboProduct);
+                comboProducts.RemoveAt(position);
                 loadListProductInCombo();
             }
         }
@@ -196,8 +189,6 @@ namespace DuLich.GUI.QuanLyCombo
             ComboProduct comboProduct = new ComboProduct();
             comboProduct.Product = product;
             comboProduct.Product_Amount = soluong;
-            if (tmpCombo.ComboProducts == null)
-                tmpCombo.ComboProducts = new List<ComboProduct>();
             comboProducts.Add(comboProduct);
             loadListProductInCombo();
             chonThietBi.Close();

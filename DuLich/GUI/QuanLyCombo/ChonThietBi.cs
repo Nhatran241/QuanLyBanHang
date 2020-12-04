@@ -60,7 +60,10 @@ namespace DuLich.GUI.QuanLyCombo
 
         private void btn_huy_Click(object sender, EventArgs e)
         {
-            chonThietBiListener.onHuyClick();
+            if(chonThietBiListener != null)
+                chonThietBiListener.onHuyClick();
+            if (thayDoiSoLuongListener != null)
+                thayDoiSoLuongListener.onHuyClick();
         }
 
         public interface IChonThietBiListener

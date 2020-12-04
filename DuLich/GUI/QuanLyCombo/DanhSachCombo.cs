@@ -53,9 +53,8 @@ namespace DuLich.GUI.QuanLyCombo
                    combo.TotalPriceOfCombo().ToString("N0")+"đ"
                 }, -1);;
                 lv_combo.Items.Add(item);
-            }
-
-           // search1.SetData(catalog_list,ngaytu,ngayden,giatu,giaden, this);
+            } 
+            search1.SetData(ngaytu,ngayden,giatu,giaden, this);
         }
 
         private void initListViewData(List<Combo> newlist)

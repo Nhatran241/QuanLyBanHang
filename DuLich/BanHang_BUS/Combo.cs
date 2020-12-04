@@ -26,7 +26,7 @@ namespace DuLich.BanHang_Entity
         public long TotalPriceOfCombo()
         {
             long totalPrice = TotalPriceOfProductsCombo();
-            return totalPrice - (totalPrice * discountPercent);
+            return (totalPrice - (totalPrice * discountPercent)/100);
         }
         public List<ComboProduct> GetListComboProduct()
         {

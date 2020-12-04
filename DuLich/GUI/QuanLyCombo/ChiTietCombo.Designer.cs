@@ -47,6 +47,8 @@ namespace DuLich.GUI.QuanLyCombo
             this.btn_thaydoisoluong = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.tb_giacombo = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tb_tonggiasanpham = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // tb_tenthietbi
@@ -54,7 +56,7 @@ namespace DuLich.GUI.QuanLyCombo
             this.tb_tenthietbi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tb_tenthietbi.Location = new System.Drawing.Point(126, 6);
             this.tb_tenthietbi.Name = "tb_tenthietbi";
-            this.tb_tenthietbi.Size = new System.Drawing.Size(263, 26);
+            this.tb_tenthietbi.Size = new System.Drawing.Size(192, 26);
             this.tb_tenthietbi.TabIndex = 5;
             this.tb_tenthietbi.TextChanged += new System.EventHandler(this.tb_tenthietbi_TextChanged);
             // 
@@ -94,7 +96,7 @@ namespace DuLich.GUI.QuanLyCombo
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(12, 46);
+            this.label4.Location = new System.Drawing.Point(350, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(72, 20);
             this.label4.TabIndex = 12;
@@ -103,10 +105,10 @@ namespace DuLich.GUI.QuanLyCombo
             // tb_giamgia
             // 
             this.tb_giamgia.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_giamgia.Location = new System.Drawing.Point(126, 40);
+            this.tb_giamgia.Location = new System.Drawing.Point(442, 6);
             this.tb_giamgia.MaxLength = 4;
             this.tb_giamgia.Name = "tb_giamgia";
-            this.tb_giamgia.Size = new System.Drawing.Size(263, 26);
+            this.tb_giamgia.Size = new System.Drawing.Size(226, 26);
             this.tb_giamgia.TabIndex = 17;
             this.tb_giamgia.TextChanged += new System.EventHandler(this.tb_giamgia_TextChanged);
             // 
@@ -200,7 +202,7 @@ namespace DuLich.GUI.QuanLyCombo
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(12, 76);
+            this.label3.Location = new System.Drawing.Point(364, 56);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 20);
             this.label3.TabIndex = 30;
@@ -209,18 +211,40 @@ namespace DuLich.GUI.QuanLyCombo
             // tb_giacombo
             // 
             this.tb_giacombo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_giacombo.Location = new System.Drawing.Point(126, 73);
+            this.tb_giacombo.Location = new System.Drawing.Point(456, 53);
             this.tb_giacombo.MaxLength = 4;
             this.tb_giacombo.Name = "tb_giacombo";
             this.tb_giacombo.ReadOnly = true;
-            this.tb_giacombo.Size = new System.Drawing.Size(263, 26);
+            this.tb_giacombo.Size = new System.Drawing.Size(212, 26);
             this.tb_giacombo.TabIndex = 31;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(12, 56);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(144, 20);
+            this.label5.TabIndex = 32;
+            this.label5.Text = "Tổng giá sản phẩm";
+            // 
+            // tb_tonggiasanpham
+            // 
+            this.tb_tonggiasanpham.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_tonggiasanpham.Location = new System.Drawing.Point(162, 53);
+            this.tb_tonggiasanpham.MaxLength = 4;
+            this.tb_tonggiasanpham.Name = "tb_tonggiasanpham";
+            this.tb_tonggiasanpham.ReadOnly = true;
+            this.tb_tonggiasanpham.Size = new System.Drawing.Size(196, 26);
+            this.tb_tonggiasanpham.TabIndex = 33;
             // 
             // ChiTietCombo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 465);
+            this.Controls.Add(this.tb_tonggiasanpham);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.tb_giacombo);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btn_thaydoisoluong);
@@ -260,5 +284,7 @@ namespace DuLich.GUI.QuanLyCombo
         private System.Windows.Forms.Button btn_thaydoisoluong;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox tb_giacombo;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox tb_tonggiasanpham;
     }
 }
