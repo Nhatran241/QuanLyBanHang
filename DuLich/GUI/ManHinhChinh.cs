@@ -3,6 +3,7 @@ using DuLich.BanHang_Entity;
 using DuLich.BUS;
 using DuLich.DAL;
 using DuLich.GUI.QuanLyChiPhi;
+using DuLich.GUI.QuanLyCombo;
 using DuLich.GUI.QuanLyDiaDiem;
 using DuLich.GUI.QuanLyDoan;
 using DuLich.GUI.QuanLyKhach;
@@ -22,6 +23,7 @@ namespace DuLich
     {
         private UserControl userControl;
         private Product_Dal product_Dal = Product_Dal.getInstance();
+        private Combo_Dal combo_Dal = Combo_Dal.getInstance();
         public ManHinhChinh()
         {
             InitializeComponent();
@@ -36,6 +38,13 @@ namespace DuLich
             panel_main_content.Controls.Clear();
             panel_main_content.Controls.Add(new DanhSachThietBi(product_Dal.GetAll(), Catalog_Dal.GetAll(), this));
         }
+        public void ShowDanhSachCombo()
+        {
+            panel_main_content.Controls.Clear();
+            panel_main_content.Controls.Add(new DanhSachCombo(combo_Dal.GetAll(), this));
+        }
+
+       
     }
 
 }
@@ -110,13 +119,66 @@ namespace DuLich
             });
         }
 
-        public void onHuyClick()
+        public void onHuyChiTietThietBiClick()
         {
             chiTietThietBi.Close();
         }
     }
 
 }
+/**
+ *  Quản lý Combo
+ */
+
+namespace DuLich
+{
+    public partial class ManHinhChinh : DanhSachCombo.IDanhSachComboListener,ChiTietCombo.IChiTietComboListener
+    {
+        ChiTietCombo chiTietCombo;
+        private void Btn_DanhSachComboClick(object sender, EventArgs e)
+        {
+            ShowDanhSachCombo();
+        }
+        public void onDanhSachCombo_SuaClick(Combo combo)
+        {
+            chiTietCombo = new ChiTietCombo(combo, this);
+            chiTietCombo.ShowDialog();
+        }
+
+        public void onDanhSachCombo_ThemClick()
+        {
+            Combo combo = new Combo();
+            chiTietCombo = new ChiTietCombo(combo, this);
+            chiTietCombo.ShowDialog();
+
+        }
+
+        public void onDanhSachCombo_XoaClick(Combo combo)
+        {
+            
+        }
+
+        public void onLuuClick(Combo combo)
+        {
+            combo.AddOrUpdate().ContinueWith(task =>
+            {
+                panel_main_content.Invoke((MethodInvoker)delegate
+                {
+                    chiTietCombo.Close();
+                    ShowDanhSachCombo();
+                });
+
+            });
+        }
+
+        public void onHuyChiTietComboClick()
+        {
+            chiTietCombo.Close();
+        }
+    }
+}
+
+
 
 /**
  * Quản Lý Tour - Danh Sách Chọn Địa ĐIểm

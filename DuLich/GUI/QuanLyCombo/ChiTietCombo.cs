@@ -8,10 +8,11 @@ using DuLich.BUS;
 
 namespace DuLich.GUI.QuanLyCombo
 {
-    public partial class ChiTietCombo : Form,ChonThietBi.IChonThietBiListener
+    public partial class ChiTietCombo : Form,ChonThietBi.IChonThietBiListener,ChonThietBi.IThayDoiSoLuongListener
     {
         private Combo combo;
         private Combo tmpCombo;
+        private List<ComboProduct> comboProducts;
         private IChiTietComboListener chiTietComboListener;
         private ChonThietBi chonThietBi;
         public ChiTietCombo(Combo combo,IChiTietComboListener chiTietComboListener)
@@ -21,6 +22,7 @@ namespace DuLich.GUI.QuanLyCombo
             this.chiTietComboListener = chiTietComboListener;
             tmpCombo = new Combo();
             tmpCombo.Map(this.combo);
+            comboProducts = tmpCombo.GetListComboProduct();
             InitUI();
         }
 
@@ -30,38 +32,59 @@ namespace DuLich.GUI.QuanLyCombo
             {
                 // Create new
                 tmpCombo.discountPercent = 0;
+                tmpCombo.CreateTime = DateTime.Now;
             }
-           
+            tb_tenthietbi.Text = tmpCombo.Combo_Name;
+            tb_giamgia.Text = tmpCombo.discountPercent.ToString()+"%";
+            loadListProductInCombo();
+        }
+
+        private void loadListProductInCombo()
+        {
+            if (comboProducts.Count > 0) {
+                lv_productincombo.Items.Clear();
+                foreach(ComboProduct comboProduct in comboProducts)
+                {
+                    ListViewItem item = new ListViewItem(new string[] {
+                    comboProduct.Product.ID.ToString(),
+                    comboProduct.Product.Product_Name,
+                    comboProduct.Product_Amount.ToString(),
+                    comboProduct.Product.Price.ToString("N0")+"đ",
+                    (comboProduct.Product.Price * comboProduct.Product_Amount).ToString("N0")+"đ"
+                }, -1);
+                    lv_productincombo.Items.Add(item);
+                }
+              
+            }
             updateGiaSauGiam();
+
         }
 
         private void btn_luu_Click(object sender, EventArgs e)
         {
-            if (Validation(tmpCombo))
-            {
-                combo.Map(tmpCombo);
-                chiTietComboListener.onLuuClick(combo);
-            }else
-            {
+            if (tmpCombo.ComboProducts == null || tmpCombo.ComboProducts.Count == 0) {
                 MessageBox.Show("Vui lòng thêm ít nhất 1 sản phẩm vào combo");
+                return;            
             }
+            if(string.IsNullOrEmpty(tmpCombo.Combo_Name))
+            {
+                MessageBox.Show("Vui lòng nhập tên combo");
+                return;
+            }
+            combo.Map(tmpCombo);
+            combo.ComboProducts = comboProducts;
+            chiTietComboListener.onLuuClick(combo);
         }
 
         private void btn_huy_Click(object sender, EventArgs e)
         {
-            chiTietComboListener.onHuyClick();
+            chiTietComboListener.onHuyChiTietComboClick();
         }
-        private bool Validation(Combo combo)
-        {
-            if (combo.ComboProducts == null)
-                return false;
-            return true;
-        }
-
+       
         public interface IChiTietComboListener
         {
             void onLuuClick(Combo combo);
-            void onHuyClick();
+            void onHuyChiTietComboClick();
         }
 
         private void tb_tenthietbi_TextChanged(object sender, EventArgs e)
@@ -73,6 +96,17 @@ namespace DuLich.GUI.QuanLyCombo
 
         private void updateGiaSauGiam()
         {
+            if(tmpCombo.ComboProducts !=null && tmpCombo.ComboProducts.Count > 0)
+            {
+                long tongia = 0;
+                foreach(ComboProduct comboProduct in tmpCombo.ComboProducts)
+                {
+                    tongia += comboProduct.Product.Price * comboProduct.Product_Amount;
+                }
+
+                tb_giacombo.Text = tongia.ToString("N0") + "đ";
+
+            }
         }
 
         private void tb_giamgia_TextChanged(object sender, EventArgs e)
@@ -132,20 +166,26 @@ namespace DuLich.GUI.QuanLyCombo
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btn_xoaThietBiKhoiCombo(object sender, EventArgs e)
         {
-
+            if (lv_productincombo.SelectedItems.Count <= 0)
+                return;
+            int position = lv_productincombo.SelectedItems[0].Index;
+            ComboProduct comboProduct = comboProducts[position];
+            DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn xóa thiết bị "+ comboProduct.Product.Product_Name +" ra khỏi combo này không","", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                comboProducts.Remove(comboProduct);
+                loadListProductInCombo();
+            }
         }
 
         private void themSanPhamVaoComboClick(object sender, EventArgs e)
         {
             List<Product> products = new List<Product>();
-            if (tmpCombo.ComboProducts != null) { 
-                foreach(ComboProduct comboProduct in tmpCombo.ComboProducts)
-                {
-                    products.Add(comboProduct.Product);
-                }
-            
+            foreach (ComboProduct comboProduct in comboProducts)
+            {
+                products.Add(comboProduct.Product);
             }
             chonThietBi = new ChonThietBi(products, this);
             chonThietBi.ShowDialog();
@@ -156,11 +196,35 @@ namespace DuLich.GUI.QuanLyCombo
             ComboProduct comboProduct = new ComboProduct();
             comboProduct.Product = product;
             comboProduct.Product_Amount = soluong;
-            tmpCombo.ComboProducts.Add(comboProduct);
+            if (tmpCombo.ComboProducts == null)
+                tmpCombo.ComboProducts = new List<ComboProduct>();
+            comboProducts.Add(comboProduct);
+            loadListProductInCombo();
+            chonThietBi.Close();
         }
 
         public void onHuyClick()
         {
+            chonThietBi.Close();
+        }
+
+        private void btn_thaydoisoluong_Click(object sender, EventArgs e)
+        {
+
+            if (lv_productincombo.SelectedItems.Count <= 0)
+              return;
+            int position = lv_productincombo.SelectedItems[0].Index;
+            ComboProduct comboProduct = comboProducts[position];
+            chonThietBi = new ChonThietBi(comboProduct.ID,comboProduct.Product,comboProduct.Product_Amount, this);
+            chonThietBi.ShowDialog();
+        }
+
+        public void onLuuClick(int maComboProduct, Product product, int soluong)
+        {
+            ComboProduct comboProduct = comboProducts.Where(c => c.ID == maComboProduct).FirstOrDefault();
+            if (comboProduct != null)
+                comboProduct.Product_Amount = soluong;
+            loadListProductInCombo();
             chonThietBi.Close();
         }
     }

@@ -22,10 +22,7 @@ namespace DuLich.BanHang_Entity
         public string Combo_Name { get; set; }
 
         [Required]
-        public DateTime startDate { get; set; }
-
-        [Required]
-        public DateTime endDate { get; set; }
+        public DateTime CreateTime { get; set; }
 
         [Required]
         public int discountPercent { get; set; }
@@ -40,9 +37,8 @@ namespace DuLich.BanHang_Entity
             this.Combo_Name = combo.Combo_Name;
             this.ComboProducts = combo.ComboProducts;
             this.discountPercent = combo.discountPercent;
-            this.endDate = combo.endDate;
+            this.CreateTime = combo.CreateTime;
             this.InvoiceDetails = combo.InvoiceDetails;
-            this.startDate = combo.startDate;
         }
     }
 }

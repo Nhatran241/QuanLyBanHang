@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BanHang_BUS\Combo.cs" />
     <Compile Include="BanHang_BUS\Product.cs" />
     <Compile Include="BanHang_DAL\Combo_Dal.cs" />
     <Compile Include="BanHang_DAL\Catalog_Dal.cs" />
@@ -107,6 +108,18 @@
     </Compile>
     <Compile Include="GUI\QuanLyChiPhi\DanhSachChiPhi.Designer.cs">
       <DependentUpon>DanhSachChiPhi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\QuanLyCombo\ChiTietCombo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\QuanLyCombo\ChiTietCombo.Designer.cs">
+      <DependentUpon>ChiTietCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\QuanLyCombo\ChonThietBi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\QuanLyCombo\ChonThietBi.Designer.cs">
+      <DependentUpon>ChonThietBi.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\QuanLyCombo\DanhSachCombo.cs">
       <SubType>UserControl</SubType>
@@ -290,6 +303,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\QuanLyChiPhi\DanhSachChiPhi.resx">
       <DependentUpon>DanhSachChiPhi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\QuanLyCombo\ChiTietCombo.resx">
+      <DependentUpon>ChiTietCombo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\QuanLyCombo\ChonThietBi.resx">
+      <DependentUpon>ChonThietBi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\QuanLyCombo\DanhSachCombo.resx">
       <DependentUpon>DanhSachCombo.cs</DependentUpon>

@@ -34,20 +34,19 @@ namespace DuLich.GUI.QuanLyCombo
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.lv_product = new System.Windows.Forms.ListView();
+            this.lv_combo = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.search1 = new DuLich.GUI.QuanLyCombo.TimKiemCombo();
             this.btn_xoa = new System.Windows.Forms.Button();
             this.btn_them = new System.Windows.Forms.Button();
             this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tourBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tourisBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tourBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tourisBindingSource)).BeginInit();
@@ -55,24 +54,23 @@ namespace DuLich.GUI.QuanLyCombo
             // 
             // lv_product
             // 
-            this.lv_product.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lv_combo.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader6,
-            this.columnHeader7,
             this.columnHeader8,
             this.columnHeader9,
             this.columnHeader10});
-            this.lv_product.FullRowSelect = true;
-            this.lv_product.HideSelection = false;
-            this.lv_product.Location = new System.Drawing.Point(3, 103);
-            this.lv_product.MultiSelect = false;
-            this.lv_product.Name = "lv_product";
-            this.lv_product.Size = new System.Drawing.Size(794, 494);
-            this.lv_product.TabIndex = 4;
-            this.lv_product.UseCompatibleStateImageBehavior = false;
-            this.lv_product.View = System.Windows.Forms.View.Details;
-            this.lv_product.DoubleClick += new System.EventHandler(this.lv_product_item_doubleclick);
+            this.lv_combo.FullRowSelect = true;
+            this.lv_combo.HideSelection = false;
+            this.lv_combo.Location = new System.Drawing.Point(3, 103);
+            this.lv_combo.MultiSelect = false;
+            this.lv_combo.Name = "lv_product";
+            this.lv_combo.Size = new System.Drawing.Size(794, 494);
+            this.lv_combo.TabIndex = 4;
+            this.lv_combo.UseCompatibleStateImageBehavior = false;
+            this.lv_combo.View = System.Windows.Forms.View.Details;
+            this.lv_combo.DoubleClick += new System.EventHandler(this.lv_product_item_doubleclick);
             // 
             // columnHeader1
             // 
@@ -82,7 +80,26 @@ namespace DuLich.GUI.QuanLyCombo
             // columnHeader2
             // 
             this.columnHeader2.Text = "Tên combo";
-            this.columnHeader2.Width = 150;
+            this.columnHeader2.Width = 200;
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Thời gian tạo";
+            this.columnHeader6.Width = 100;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Tổng giá gốc sản phẩm";
+            this.columnHeader8.Width = 150;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Giảm giá";
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "Tổng giá sau giảm";
+            this.columnHeader10.Width = 150;
             // 
             // search1
             // 
@@ -129,35 +146,11 @@ namespace DuLich.GUI.QuanLyCombo
             this.tourisBindingSource.DataSource = typeof(DuLich.BUS.Tour);
             this.tourisBindingSource.CurrentChanged += new System.EventHandler(this.tourisBindingSource_CurrentChanged);
             // 
-            // columnHeader6
-            // 
-            this.columnHeader6.Text = "Thời gian bắt đầu";
-            this.columnHeader6.Width = 100;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "Thời gian kết thúc";
-            this.columnHeader7.Width = 100;
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.Text = "Tổng giá gốc sản phẩm";
-            this.columnHeader8.Width = 150;
-            // 
-            // columnHeader9
-            // 
-            this.columnHeader9.Text = "Giảm giá";
-            // 
-            // columnHeader10
-            // 
-            this.columnHeader10.Text = "Tổng giá sau giảm";
-            this.columnHeader10.Width = 150;
-            // 
             // DanhSachCombo
             // 
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.Controls.Add(this.lv_product);
+            this.Controls.Add(this.lv_combo);
             this.Controls.Add(this.btn_xoa);
             this.Controls.Add(this.btn_them);
             this.Controls.Add(this.search1);
@@ -181,11 +174,10 @@ namespace DuLich.GUI.QuanLyCombo
         private DataGridViewTextBoxColumn catalogIDDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn productDetailDataGridViewTextBoxColumn;
         private BindingSource productBindingSource;
-        private ListView lv_product;
+        private ListView lv_combo;
         private ColumnHeader columnHeader1;
         private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader6;
-        private ColumnHeader columnHeader7;
         private ColumnHeader columnHeader8;
         private ColumnHeader columnHeader9;
         private ColumnHeader columnHeader10;

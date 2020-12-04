@@ -80,7 +80,7 @@ namespace DuLich
             this.button1.TabIndex = 8;
             this.button1.Text = "Quản lý combo";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.Btn_DanhSachComboClick);
             // 
             // button2
             // 

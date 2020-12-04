@@ -64,7 +64,7 @@ namespace DuLich.GUI.QuanLyThietBi
 
         private void btn_huy_Click(object sender, EventArgs e)
         {
-            chiTietThietBiListener.onHuyClick();
+            chiTietThietBiListener.onHuyChiTietThietBiClick();
         }
         private bool Validation(Product product)
         {
@@ -81,7 +81,7 @@ namespace DuLich.GUI.QuanLyThietBi
         public interface IChiTietThietBiListener
         {
             void onLuuClick(Product product);
-            void onHuyClick();
+            void onHuyChiTietThietBiClick();
         }
 
         private void tb_tenthietbi_TextChanged(object sender, EventArgs e)

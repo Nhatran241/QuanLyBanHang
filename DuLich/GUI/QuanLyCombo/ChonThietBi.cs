@@ -16,24 +16,46 @@ namespace DuLich.GUI.QuanLyCombo
         private Product product;
         private int soluong = 1;
         private IChonThietBiListener chonThietBiListener;
+        private IThayDoiSoLuongListener thayDoiSoLuongListener;
+        private int maProductCombo;
         public ChonThietBi(List<Product> danhSachThietBiTrongCombo,IChonThietBiListener chonThietBiListener)
         {
             InitializeComponent();
             this.chonThietBiListener = chonThietBiListener;
             List<Product> danhSachThietBi = Product_Dal.getInstance().GetAll();
-            foreach(Product product in danhSachThietBi)
+            foreach(Product product in danhSachThietBiTrongCombo)
             {
-                if (danhSachThietBiTrongCombo.Contains(product))
+                if (danhSachThietBi.Contains(product))
                     danhSachThietBi.Remove(product);
             }
             panel1.Controls.Clear();
             panel1.Controls.Add(new DanhSachThietBi(danhSachThietBi, Catalog_Dal.GetAll(), this));
         }
+        public ChonThietBi(int maComboProduct , Product product , int soluong, IThayDoiSoLuongListener thayDoiSoLuongListener)
+        {
+            InitializeComponent();
+            this.maProductCombo = maProductCombo;
+            this.product = product;
+            this.soluong = soluong;
+            this.thayDoiSoLuongListener = thayDoiSoLuongListener;
+            tb_soluong.Text = soluong.ToString();
+            tb_thietbidachon.Text = product.Product_Name;
+        }
 
 
         private void btn_luu_Click(object sender, EventArgs e)
         {
-            chonThietBiListener.onLuuClick(product,soluong);
+            if (product != null) {
+                if(chonThietBiListener != null)
+                    chonThietBiListener.onLuuClick(product, soluong);
+
+                if (thayDoiSoLuongListener != null)
+                    thayDoiSoLuongListener.onLuuClick(maProductCombo,product, soluong);
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng thêm ít nhất 1 thiết bị");
+            }
         }
 
         private void btn_huy_Click(object sender, EventArgs e)
@@ -44,6 +66,11 @@ namespace DuLich.GUI.QuanLyCombo
         public interface IChonThietBiListener
         {
             void onLuuClick(Product product,int soluong);
+            void onHuyClick();
+        }
+        public interface IThayDoiSoLuongListener
+        {
+            void onLuuClick(int maComboProduct ,Product product, int soluong);
             void onHuyClick();
         }
 
@@ -82,7 +109,13 @@ namespace DuLich.GUI.QuanLyCombo
         public void onDanhSachThietBi_DoubleClick(Product product)
         {
             this.product = product;
+            tb_thietbidachon.Text = product.Product_Name;
             tb_soluong.Text = "1";
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

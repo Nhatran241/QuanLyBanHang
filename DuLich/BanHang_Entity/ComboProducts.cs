@@ -20,5 +20,13 @@ namespace DuLich.BanHang_Entity
         [Required]
         public int Product_Amount { get; set; }
         public virtual Combo Combo { get; set; }
+
+        public void Map(ComboProduct comboProduct)
+        {
+            this.ID = comboProduct.ID;
+            this.Combo = comboProduct.Combo;
+            this.Product = comboProduct.Product;
+            this.Product_Amount = comboProduct.Product_Amount;
+        }
     }
 }

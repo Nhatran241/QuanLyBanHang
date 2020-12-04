@@ -22,7 +22,7 @@ namespace DuLich.BanHang_Dal
             return instance;
 
         }
-        public static List<Combo> GetAll()
+        public List<Combo> GetAll()
         {
             return context.Comboes.ToList();
         }
