@@ -69,7 +69,7 @@ namespace DuLich
             this.btn_quanlydiadiem.TabIndex = 7;
             this.btn_quanlydiadiem.Text = "Quản lý kho hàng";
             this.btn_quanlydiadiem.UseVisualStyleBackColor = true;
-            this.btn_quanlydiadiem.Click += new System.EventHandler(this.btn_quanlydiadiem_Click);
+            this.btn_quanlydiadiem.Click += new System.EventHandler(this.btn_quanlykhoclick);
             // 
             // button1
             // 

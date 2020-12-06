@@ -7,6 +7,7 @@ using DuLich.GUI.QuanLyCombo;
 using DuLich.GUI.QuanLyDiaDiem;
 using DuLich.GUI.QuanLyDoan;
 using DuLich.GUI.QuanLyKhach;
+using DuLich.GUI.QuanLyKhoHang;
 using DuLich.GUI.QuanLyNhanVien;
 using DuLich.GUI.QuanLyPhanCong;
 using DuLich.GUI.QuanLyThietBi;
@@ -24,6 +25,7 @@ namespace DuLich
         private UserControl userControl;
         private Product_Dal product_Dal = Product_Dal.getInstance();
         private Combo_Dal combo_Dal = Combo_Dal.getInstance();
+        private Storage_Dal storage_Dal = Storage_Dal.getInstance();
         public ManHinhChinh()
         {
             InitializeComponent();
@@ -44,7 +46,13 @@ namespace DuLich
             panel_main_content.Controls.Add(new DanhSachCombo(combo_Dal.GetAll(), this));
         }
 
-       
+        private void showDanhSachXuatNhap()
+        {
+            panel_main_content.Controls.Clear();
+            panel_main_content.Controls.Add(new DanhSachXuatNhap(storage_Dal.GetAll(),product_Dal.GetAll(), this));
+        }
+
+
     }
 
 }
@@ -599,82 +607,54 @@ namespace DuLich
 }
 
 /**
- * Quản Lý Địa Điểm
+ * Quản Lý Kho Hàng
  */
 namespace DuLich
 {
-    public partial class ManHinhChinh : DanhSachDiaDiem.IDanhSachDiaDiemListener, ChiTietDiaDiem.IChiTietDiaDiemListener
+    public partial class ManHinhChinh : DanhSachXuatNhap.IDanhSachXuatNhapListener,ChiTietXuatNhap.IChiTietXuatNhapListener
     {
-        ChiTietDiaDiem chiTietDiaDiem;
+        ChiTietXuatNhap chiTietXuatNhap;
 
-        private void btn_quanlydiadiem_Click(object sender, EventArgs e)
+        private void btn_quanlykhoclick(object sender, EventArgs e)
         {
-            userControl = new DanhSachDiaDiem(DiaDiemDal.GetAll(), this);
-            panel_main_content.Controls.Clear();
-            panel_main_content.Controls.Add(userControl);
+            showDanhSachXuatNhap();
         }
 
-        public void onDanhSachDiaDiem_ThemClick()
+        public void onDanhSachXuatNhap_SuaClick(Storage storage)
         {
-            chiTietDiaDiem = new ChiTietDiaDiem(new DiaDiem(), this);
-            chiTietDiaDiem.ShowDialog();
+            chiTietXuatNhap = new ChiTietXuatNhap(storage, product_Dal.GetAll(), this);
+            chiTietXuatNhap.ShowDialog();
         }
 
-        public void onDanhSachDiaDiem_XoaClick(DiaDiem diaDiem)
+        public void onDanhSachXuatNhap_ThemClick()
         {
-            DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn xóa Địa điểm với mã là :" + diaDiem.MaDienDiem, "", MessageBoxButtons.YesNo);
-            if (dialogResult == DialogResult.Yes)
-            {
-                String message = "";
-                List<Tour> listTour = diaDiem.GetListTour();
-                if (listTour.Count> 0)
-                {
-                    foreach (Tour tour in listTour)
-                    {
-                        message += tour.TenTour + " \n";
-                    }
-                    DialogResult innerDialogResukt = MessageBox.Show("Địa điểm " + diaDiem.TenDiaDiem + " đang được dùng ở các tour \n" + message + " vui lòng xóa những Tour trên trước");
-                }
-                else
-                {
-                    diaDiem.Delete().ContinueWith(task =>
-                    {
-                        panel_main_content.Invoke((MethodInvoker)delegate
-                        {
-                            userControl = new DanhSachDiaDiem(DiaDiemDal.GetAll(), this);
-                            panel_main_content.Controls.Clear();
-                            panel_main_content.Controls.Add(userControl);
-                        });
-                    });
-                }
-
-            }
+            Storage storage = new Storage();
+            chiTietXuatNhap = new ChiTietXuatNhap(storage, product_Dal.GetAll(), this);
+            chiTietXuatNhap.ShowDialog();
         }
 
-        public void onDanhSachDiaDiem_SuaClick(DiaDiem diaDiem)
+        public void onDanhSachXuatNhap_XoaClick(Storage storage)
         {
-
-            chiTietDiaDiem = new ChiTietDiaDiem(diaDiem, this);
-            chiTietDiaDiem.ShowDialog();
         }
 
-        public void onLuuDiaDiem(DiaDiem diaDiem)
+        public void onLuuClick(Storage storage,int difAmount)
         {
-            diaDiem.AddOrUpdate().ContinueWith(task =>
-            {
-                panel_main_content.Invoke((MethodInvoker)delegate
-                {
-                    chiTietDiaDiem.Close();
-                    userControl = new DanhSachDiaDiem(DiaDiemDal.GetAll(), this);
-                    panel_main_content.Controls.Clear();
-                    panel_main_content.Controls.Add(userControl);
-                });
-            });
+            storage.AddOrUpdate(difAmount).ContinueWith(task =>
+             {
+                 panel_main_content.Invoke((MethodInvoker)delegate
+                 {
+                     chiTietXuatNhap.Close();
+                     showDanhSachXuatNhap();
+                 });
+
+             });
         }
 
-        public void onHuyDiaDiemClick()
+     
+
+        public void onHuyChiTietXuatNhapClick()
         {
-            chiTietDiaDiem.Close();
+            chiTietXuatNhap.Close();
         }
     }
 }

@@ -15,5 +15,6 @@ namespace DuLich.BanHang_Entity
         public int Amount { get; set; }
         public DateTime createTime { get; set; }
         public virtual Product Product { get; set; }
+
     }
 }

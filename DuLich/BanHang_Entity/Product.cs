@@ -52,5 +52,9 @@ namespace DuLich.BanHang_Entity
             this.InvoiceDetails = product.InvoiceDetails;
             this.Storage = product.Storage;
         }
+        public override string ToString()
+        {
+            return Product_Name;
+        }
     }
 }

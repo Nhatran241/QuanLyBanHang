@@ -61,6 +61,9 @@
   <ItemGroup>
     <Compile Include="BanHang_BUS\Combo.cs" />
     <Compile Include="BanHang_BUS\Product.cs" />
+    <Compile Include="BanHang_BUS\Storage.cs" />
+    <Compile Include="BanHang_DAL\Storage_Dal.cs" />
+    <Compile Include="BanHang_DAL\Employee_Dal.cs" />
     <Compile Include="BanHang_DAL\Combo_Dal.cs" />
     <Compile Include="BanHang_DAL\Catalog_Dal.cs" />
     <Compile Include="BanHang_DAL\Product_Dal.cs" />
@@ -168,6 +171,24 @@
     </Compile>
     <Compile Include="GUI\QuanLyKhach\SearchKhach.Designer.cs">
       <DependentUpon>SearchKhach.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\QuanLyKhoHang\ChiTietXuatNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\QuanLyKhoHang\ChiTietXuatNhap.Designer.cs">
+      <DependentUpon>ChiTietXuatNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\QuanLyKhoHang\DanhSachXuatNhap.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\QuanLyKhoHang\DanhSachXuatNhap.Designer.cs">
+      <DependentUpon>DanhSachXuatNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI\QuanLyKhoHang\TimKiemKhoHang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\QuanLyKhoHang\TimKiemKhoHang.Designer.cs">
+      <DependentUpon>TimKiemKhoHang.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\QuanLyNhanVien\ChiTietNhanVien.cs">
       <SubType>Form</SubType>
@@ -290,9 +311,7 @@
     <Compile Include="GUI\QuanLyTouris\ChiTietTouris.Designer.cs">
       <DependentUpon>ChiTietTouris.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\ManHinhChinh.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="GUI\ManHinhChinh.cs" />
     <Compile Include="GUI\ManHinhChinh.Designer.cs">
       <DependentUpon>ManHinhChinh.cs</DependentUpon>
     </Compile>
@@ -339,6 +358,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\QuanLyKhach\SearchKhach.resx">
       <DependentUpon>SearchKhach.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\QuanLyKhoHang\ChiTietXuatNhap.resx">
+      <DependentUpon>ChiTietXuatNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\QuanLyKhoHang\DanhSachXuatNhap.resx">
+      <DependentUpon>DanhSachXuatNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\QuanLyKhoHang\TimKiemKhoHang.resx">
+      <DependentUpon>TimKiemKhoHang.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\QuanLyNhanVien\ChiTietNhanVien.resx">
       <DependentUpon>ChiTietNhanVien.cs</DependentUpon>
