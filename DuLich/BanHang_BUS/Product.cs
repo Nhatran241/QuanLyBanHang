@@ -19,5 +19,19 @@ namespace DuLich.BanHang_Entity
         {
             return (Price - (Price * DiscountPercent) / 100);
         }
+
+        public int GetAmountInStorageByTime(DateTime time)
+        {
+            int amount = Amount;
+            foreach(Storage storages in Storage)
+            {
+                if(storages.createTime.Day > time.Day)
+                {
+                    amount -= storages.Amount;
+                }
+            }
+            return amount;
+        }
+       
     }
 }

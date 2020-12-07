@@ -311,7 +311,9 @@
     <Compile Include="GUI\QuanLyTouris\ChiTietTouris.Designer.cs">
       <DependentUpon>ChiTietTouris.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\ManHinhChinh.cs" />
+	  <Compile Include="GUI\ManHinhChinh.cs">
+		  <SubType>Form</SubType>
+	  </Compile>
     <Compile Include="GUI\ManHinhChinh.Designer.cs">
       <DependentUpon>ManHinhChinh.cs</DependentUpon>
     </Compile>

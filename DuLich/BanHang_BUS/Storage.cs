@@ -1,4 +1,5 @@
 using DuLich.BanHang_Dal;
+using System;
 using System.Threading.Tasks;
 
 namespace DuLich.BanHang_Entity
@@ -18,6 +19,12 @@ namespace DuLich.BanHang_Entity
         {
             Product.Amount += difAmount;
             return Storage_Dal.getInstance().AddOrUpdate(this);
+        }
+
+        public Task Delete()
+        {
+            Product.Amount -= Amount;
+            return Storage_Dal.getInstance().Delete(this);
         }
     }
 }

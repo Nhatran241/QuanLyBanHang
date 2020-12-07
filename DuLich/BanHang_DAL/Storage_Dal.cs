@@ -28,6 +28,12 @@ namespace DuLich.BanHang_Dal
             return context.SaveChangesAsync();
         }
 
+        public Task Delete(Storage storage)
+        {
+            context.Storages.Remove(storage);
+            return context.SaveChangesAsync();
+        }
+
         public List<Storage> GetAll()
         {
             return context.Storages.ToList();

@@ -51,6 +51,11 @@ namespace DuLich
             panel_main_content.Controls.Clear();
             panel_main_content.Controls.Add(new DanhSachXuatNhap(storage_Dal.GetAll(),product_Dal.GetAll(), this));
         }
+        private void showThongKe()
+        {
+            panel_main_content.Controls.Clear();
+            panel_main_content.Controls.Add(new ThongKe(product_Dal.GetAll()));
+        }
 
 
     }
@@ -85,33 +90,15 @@ namespace DuLich
 
         public void onDanhSachThietBi_XoaClick(Product product)
         {
-            /**
-            DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn xóa Touris với mã là :" + product.ID, "", MessageBoxButtons.YesNo);
+            DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn xóa thiết bị này ", "", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                List<Doan> doanDangKhaiThac = tour.GetListDoanOfTour();
-                if (doanDangKhaiThac.Count > 0)
+                if(product.ComboProducts != null && product.ComboProducts.Count >0 || product.Storage != null && product.Storage.Count > 0)
                 {
-                    String message = "";
-                    foreach (Doan doan in doanDangKhaiThac)
-                    {
-                        message += "- " + doan.TenDoan + " \n";
-                    }
-                    DialogResult innerDialogResukt = MessageBox.Show("Tour này đang được sử dụng ở các đoàn : \n " + message + " nên không thể xóa tour này");
+                    DialogResult kq = MessageBox.Show("Không thể xóa thiết bị này vì thiết bị đang thuộc combo hoặc đơn hàng khác", "", MessageBoxButtons.YesNo);
                 }
-                else
-                {
-                    tour.Delete().ContinueWith(task =>
-                    {
-                        panel_main_content.Invoke((MethodInvoker)delegate
-                        {
-                            panel_main_content.Controls.Clear();
-                            panel_main_content.Controls.Add(new DanhSachThietBi(Product_Dal.GetAll(), Catalog_Dal.GetAll(), this));
-                        });
-                    });
-                }
+
             }
-            **/
         }
 
         public void onLuuClick(Product product)
@@ -635,6 +622,24 @@ namespace DuLich
 
         public void onDanhSachXuatNhap_XoaClick(Storage storage)
         {
+            DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn xóa phiếu này không , khi xóa số lượng của thiết bị sẽ được cập nhật lại", "", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                if(storage.Product.Amount - storage.Amount < 0)
+                {
+                    DialogResult a = MessageBox.Show("Số lượng của thiết bị trong kho hiện tại không thể nhỏ hơn số lượng của phiếu nhập này", "", MessageBoxButtons.YesNo);
+                    return;
+                }
+                storage.Delete().ContinueWith(task =>
+                {
+                    panel_main_content.Invoke((MethodInvoker)delegate
+                    {
+
+                        showDanhSachXuatNhap();
+                    });
+                });
+            }
+
         }
 
         public void onLuuClick(Storage storage,int difAmount)
@@ -796,10 +801,7 @@ namespace DuLich
     {
         private void btn_thongke_Click(object sender, EventArgs e)
         {
-
-            userControl = new ThongKe(NhanVienDal.GetAll(),TourDal.GetAll(),DoanDal.GetAll(),KhachDal.GetAll());
-            panel_main_content.Controls.Clear();
-            panel_main_content.Controls.Add(userControl);
+            showThongKe();
         }
     }
 }

@@ -24,7 +24,8 @@ namespace DuLich.GUI.QuanLyCombo
             InitializeComponent();
             this.danhSachComboListener = danhSachComboListener;
             this.combo_list = _combo_list;
-            InitData();
+            if(combo_list.Count > 0) 
+                InitData();
         }
 
         private void InitData()

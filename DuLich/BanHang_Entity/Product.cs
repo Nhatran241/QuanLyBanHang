@@ -38,6 +38,7 @@ namespace DuLich.BanHang_Entity
         public virtual Catalog Catalog { get; set; }
         public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
         public virtual ICollection<Storage> Storage { get; set; }
+        public virtual ICollection<ComboProduct> ComboProducts { get; set; }
 
         public void Map(Product product)
         {

@@ -157,6 +157,9 @@
                .WithRequired(e => e.Combo)
                .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Product>()
+               .HasMany(e => e.ComboProducts);
+
 
         }
     }
