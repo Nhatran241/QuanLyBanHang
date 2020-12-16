@@ -6,56 +6,56 @@ namespace DuLich.BanHang_Entity
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Product")]
-    public partial class Product
+    [Table("product")]
+    public partial class product
     {
-        public Product()
+        public product()
         {
-            InvoiceDetails = new HashSet<InvoiceDetail>();
+            invoicedetails = new HashSet<invoicedetail>();
         }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public int id { get; set; }
 
         [Required]
-        public string Product_Name { get; set; }
+        public string product_name { get; set; }
 
         [Required]
         [StringLength(650)]
-        public string Detail { get; set; }
+        public string detail { get; set; }
 
         [Required]
-        public int Amount { get; set; }
+        public int amount { get; set; }
 
         [Required]
-        public long Price { get; set; }
+        public long price { get; set; }
         [Required]
-        public DateTime CreateTime { get; set; }
+        public DateTime createtime { get; set; }
         [Required]
-        public int DiscountPercent { get; set; }
+        public int discountpercent { get; set; }
 
-        public virtual Catalog Catalog { get; set; }
-        public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
-        public virtual ICollection<Storage> Storage { get; set; }
-        public virtual ICollection<ComboProduct> ComboProducts { get; set; }
+        public virtual catalog catalog { get; set; }
+        public virtual ICollection<invoicedetail> invoicedetails { get; set; }
+        public virtual ICollection<storage> storage { get; set; }
+        public virtual ICollection<comboproducts> comboproducts { get; set; }
 
-        public void Map(Product product)
+        public void Map(product product)
         {
-            this.ID = product.ID;
-            this.Product_Name = product.Product_Name;
-            this.Detail = product.Detail;
-            this.Amount = product.Amount;
-            this.Price = product.Price;
-            this.CreateTime = product.CreateTime;
-            this.DiscountPercent = product.DiscountPercent;
-            this.Catalog = product.Catalog;
-            this.InvoiceDetails = product.InvoiceDetails;
-            this.Storage = product.Storage;
+            this.id = product.id;
+            this.product_name = product.product_name;
+            this.detail = product.detail;
+            this.amount = product.amount;
+            this.price = product.price;
+            this.createtime = product.createtime;
+            this.discountpercent = product.discountpercent;
+            this.catalog = product.catalog;
+            this.invoicedetails = product.invoicedetails;
+            this.storage = product.storage;
         }
         public override string ToString()
         {
-            return Product_Name;
+            return product_name;
         }
     }
 }

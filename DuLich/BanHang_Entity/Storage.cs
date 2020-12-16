@@ -6,15 +6,15 @@ namespace DuLich.BanHang_Entity
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Storage")]
-    public partial class Storage
+    [Table("storage")]
+    public partial class storage
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
-        public int Amount { get; set; }
-        public DateTime createTime { get; set; }
-        public virtual Product Product { get; set; }
+        public int id { get; set; }
+        public int amount { get; set; }
+        public DateTime createtime { get; set; }
+        public virtual product product { get; set; }
 
     }
 }

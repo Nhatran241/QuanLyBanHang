@@ -6,27 +6,27 @@ namespace DuLich.BanHang_Entity
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("ComboProduct")]
-    public partial class ComboProduct
+    [Table("comboproduct")]
+    public partial class comboproducts
     {
-        public ComboProduct()
+        public comboproducts()
         {
         }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
-        public virtual Product Product { get; set; }
+        public int id { get; set; }
+        public virtual product product { get; set; }
         [Required]
-        public int Product_Amount { get; set; }
-        public virtual Combo Combo { get; set; }
+        public int product_amount { get; set; }
+        public virtual combo combo { get; set; }
 
-        public void Map(ComboProduct comboProduct)
+        public void Map(comboproducts comboProduct)
         {
-            this.ID = comboProduct.ID;
-            this.Combo = comboProduct.Combo;
-            this.Product = comboProduct.Product;
-            this.Product_Amount = comboProduct.Product_Amount;
+            this.id = comboProduct.id;
+            this.combo = comboProduct.combo;
+            this.product = comboProduct.product;
+            this.product_amount = comboProduct.product_amount;
         }
     }
 }

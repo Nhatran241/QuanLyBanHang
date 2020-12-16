@@ -6,29 +6,28 @@ namespace DuLich.BanHang_Entity
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Invoice")]
-    public partial class Invoice
+    [Table("invoice")]
+    public partial class invoice
     {
-        public Invoice()
+        public invoice()
         {
-            InvoiceDetails = new HashSet<InvoiceDetail>();
+            invoicedetails = new HashSet<invoicedetail>();
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public int id { get; set; }
         [Required]
-        public string Invoice_Name { get; set; }
+        public string invoice_name { get; set; }
         [Required]
-        public long totalMoney { get; set; }
+        public long totalmoney { get; set; }
         [Required]
-        public DateTime createdDate { get; set; }
+        public DateTime createddate { get; set; }
         [Required]
-        public string customerAddress { get; set; }
+        public string customeraddress { get; set; }
         [Required]
-        public DateTime shipDate { get; set; }
+        public DateTime shipdate { get; set; }
         public int status { get; set; }
-        public virtual Customer Customer { get; set; }
-        public virtual Employee Shipper { get; set; }
-        public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
+        public virtual customer customer { get; set; }
+        public virtual ICollection<invoicedetail> invoicedetails { get; set; }
     }
 }

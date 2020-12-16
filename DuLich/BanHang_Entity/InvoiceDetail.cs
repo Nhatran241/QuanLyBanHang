@@ -6,23 +6,23 @@ namespace DuLich.BanHang_Entity
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("InvoiceDetail")]
-    public partial class InvoiceDetail
+    [Table("invoicedetail")]
+    public partial class invoicedetail
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public int id { get; set; }
 
         [Required]
-        public int Amount { get; set; }
+        public int amount { get; set; }
 
         [Required]
-        public long Price { get; set; }
+        public long price { get; set; }
 
-        public virtual Combo Combo { get; set; }
+        public virtual combo combo { get; set; }
 
-        public virtual Invoice Invoice { get; set; }
+        public virtual invoice invoice { get; set; }
 
-        public virtual Product Product { get; set; }
+        public virtual product product { get; set; }
     }
 }

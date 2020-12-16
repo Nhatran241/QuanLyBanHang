@@ -9,9 +9,9 @@ namespace DuLich.GUI.QuanLyKhoHang
 {
     public partial class TimKiemKhoHang : UserControl
     {
-        private List<Product> Products = new List<Product>();
-        private Product filterProduct = new Product();
-        private Employee filterEmployee = new Employee();
+        private List<product> Products = new List<product>();
+        private product filterProduct = new product();
+        private employee filterEmployee = new employee();
         private long soluongtu = 0;
         private long soluongden = long.MaxValue;
         private DateTime ngaytu = new DateTime();
@@ -23,7 +23,7 @@ namespace DuLich.GUI.QuanLyKhoHang
         {
             InitializeComponent();
         }
-        public void SetData(List<Product> products,DateTime ngaytu,DateTime ngayden,long soluongtu,long soluongden,ITimKiemKhoHangListener timKiemKhoHangListener)
+        public void SetData(List<product> products,DateTime ngaytu,DateTime ngayden,long soluongtu,long soluongden,ITimKiemKhoHangListener timKiemKhoHangListener)
         {
             this.timKiemKhoHangListener = timKiemKhoHangListener;
             this.Products.AddRange(products);
@@ -35,15 +35,15 @@ namespace DuLich.GUI.QuanLyKhoHang
             if (soluongtu > soluongden)
                 this.soluongden = soluongtu;
             this.soluongtu = 0;
-            filterProduct.ID = -1;
-            filterProduct.Product_Name = "Bất kỳ";
+            filterProduct.id = -1;
+            filterProduct.product_name = "Bất kỳ";
             this.Products.Insert(0, filterProduct);
             InitData();
         }
 
         private void InitData()
         {
-            foreach(Product product in Products)
+            foreach(product product in Products)
             {
                 cb_search.Items.Add(product);
             }
@@ -69,7 +69,7 @@ namespace DuLich.GUI.QuanLyKhoHang
 
         public interface ITimKiemKhoHangListener
         {
-            void onTimKiem(Product product,long soluongtu,long soluongden,DateTime ngaytu,DateTime ngayden,bool isNhap,bool isXuat);
+            void onTimKiem(product product,long soluongtu,long soluongden,DateTime ngaytu,DateTime ngayden,bool isNhap,bool isXuat);
         }
 
         private void datepickbatdau_ValueChanged(object sender, EventArgs e)

@@ -6,17 +6,16 @@ namespace DuLich.BanHang_Entity
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Employee")]
-    public partial class Employee
+    [Table("employee")]
+    public partial class employee
     {
-        public Employee()
+        public employee()
         {
-            Invoices = new HashSet<Invoice>();
         }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public int id { get; set; }
 
         [Required]
         public string username { get; set; }
@@ -25,23 +24,22 @@ namespace DuLich.BanHang_Entity
         public string password { get; set; }
 
         [Required]
-        public string firstName { get; set; }
+        public string firstname { get; set; }
 
         [Required]
-        public string lastName { get; set; }
+        public string lastname { get; set; }
 
         public bool gender { get; set; }
 
         [Required]
-        public DateTime birthDate { get; set; }
+        public DateTime birthdate { get; set; }
 
         [Required]
         public string address { get; set; }
 
         [Required]
-        public DateTime joinDate { get; set; }
+        public DateTime joindate { get; set; }
 
-        public virtual Role Role { get; set; }
-        public virtual ICollection<Invoice> Invoices { get; set; }
+        public virtual role role { get; set; }
     }
 }

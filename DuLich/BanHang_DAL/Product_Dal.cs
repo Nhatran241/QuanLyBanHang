@@ -21,11 +21,11 @@ namespace DuLich.BanHang_Dal
             return instance;
 
         }
-        public List<Product> GetAll()
+        public List<product> GetAll()
         {
             return context.Products.ToList();
         }
-        public Task AddOrUpdate(Product product)
+        public Task AddOrUpdate(product product)
         {
             context.Products.AddOrUpdate(product);
             return context.SaveChangesAsync();

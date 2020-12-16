@@ -10,8 +10,8 @@ namespace DuLich.GUI.ThongKe
 {
     public partial class ThongKe : UserControl
     {
-        private List<Product> danhSachThietBi;
-        public ThongKe(List<Product> danhSachThietBi)
+        private List<product> danhSachThietBi;
+        public ThongKe(List<product> danhSachThietBi)
         {
             InitializeComponent();
             this.danhSachThietBi = danhSachThietBi;
@@ -19,18 +19,18 @@ namespace DuLich.GUI.ThongKe
         }
 
 
-        private void InitThongKeTonKho(List<Product> products)
+        private void InitThongKeTonKho(List<product> products)
         {
             listview_solanditour.Items.Clear();
-            foreach(Product product in products.Where(c=>c.ID != -1))
+            foreach(product product in products.Where(c=>c.id != -1))
             {
 
                 for (DateTime date = tonkhotu.Value; date.Date <= tonkhoden.Value; date = date.AddDays(1))
                 {
                     int amount = product.GetAmountInStorageByTime(date);
                     ListViewItem listViewItem1 = new ListViewItem(new string[] {
-                    product.ID.ToString(),
-                    product.Product_Name,
+                    product.id.ToString(),
+                    product.product_name,
                     amount.ToString(),
                     date.ToString()}, -1);
                     listview_solanditour.Items.Add(listViewItem1);
@@ -43,15 +43,15 @@ namespace DuLich.GUI.ThongKe
         {
             if(danhSachThietBi.Count > 0)
             {
-                DateTime min = danhSachThietBi.First().CreateTime;
-                Product tmp = new Product();
-                tmp.ID = -1;
-                tmp.Product_Name = "Tất cả";
+                DateTime min = danhSachThietBi.First().createtime;
+                product tmp = new product();
+                tmp.id = -1;
+                tmp.product_name = "Tất cả";
                 danhSachThietBi.Insert(0, tmp);
-                foreach (Product product in danhSachThietBi.Where(c=>c.ID != -1))
+                foreach (product product in danhSachThietBi.Where(c=>c.id != -1))
                 {
-                    if (product.CreateTime < min)
-                        min = product.CreateTime;
+                    if (product.createtime < min)
+                        min = product.createtime;
                 }
                 comboBox1.DataSource = danhSachThietBi;
                 tonkhotu.MinDate = min;
@@ -78,7 +78,7 @@ namespace DuLich.GUI.ThongKe
             int position = comboBox1.SelectedIndex;
             if (position != 0)
             {
-                InitThongKeTonKho(danhSachThietBi.Where(c => c.ID == danhSachThietBi.ToArray()[position].ID).ToList());
+                InitThongKeTonKho(danhSachThietBi.Where(c => c.id == danhSachThietBi.ToArray()[position].id).ToList());
             }
             else
             {
@@ -95,7 +95,7 @@ namespace DuLich.GUI.ThongKe
             int position = comboBox1.SelectedIndex;
             if (position != 0)
             {
-                InitThongKeTonKho(danhSachThietBi.Where(c => c.ID == danhSachThietBi.ToArray()[position].ID).ToList());
+                InitThongKeTonKho(danhSachThietBi.Where(c => c.id == danhSachThietBi.ToArray()[position].id).ToList());
             }
             else
             {
@@ -124,7 +124,7 @@ namespace DuLich.GUI.ThongKe
             int position = comboBox1.SelectedIndex;
             if(position != 0)
             {
-                InitThongKeTonKho(danhSachThietBi.Where(c => c.ID == danhSachThietBi.ToArray()[position].ID).ToList());
+                InitThongKeTonKho(danhSachThietBi.Where(c => c.id == danhSachThietBi.ToArray()[position].id).ToList());
             }else
             {
                 InitThongKeTonKho(danhSachThietBi);

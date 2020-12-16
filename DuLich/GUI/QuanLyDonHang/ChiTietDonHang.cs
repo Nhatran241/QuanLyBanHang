@@ -6,16 +6,16 @@ using System.Windows.Forms;
 using DuLich.BanHang_Entity;
 using DuLich.BUS;
 
-namespace DuLich.GUI.QuanLyCombo
+namespace DuLich.GUI.QuanLyDonHang
 {
-    public partial class ChiTietCombo : Form,ChonThietBi.IChonThietBiListener,ChonThietBi.IThayDoiSoLuongListener
+    public partial class ChiTietDonHang : Form,ChonThietBiHoacCombo.IChonThietBiListener, ChonThietBiHoacCombo.IThayDoiSoLuongListener
     {
         private combo combo;
         private combo tmpCombo;
         private List<comboproducts> comboProducts;
         private IChiTietComboListener chiTietComboListener;
-        private ChonThietBi chonThietBi;
-        public ChiTietCombo(combo combo,IChiTietComboListener chiTietComboListener)
+        private ChonThietBiHoacCombo chonThietBi;
+        public ChiTietDonHang(combo combo,IChiTietComboListener chiTietComboListener)
         {
             InitializeComponent();
             this.combo = combo;
@@ -180,7 +180,7 @@ namespace DuLich.GUI.QuanLyCombo
             {
                 products.Add(comboProduct.product);
             }
-            chonThietBi = new ChonThietBi(products, this);
+            chonThietBi = new ChonThietBiHoacCombo(products, this);
             chonThietBi.ShowDialog();
         }
 
@@ -206,7 +206,7 @@ namespace DuLich.GUI.QuanLyCombo
               return;
             int position = lv_productincombo.SelectedItems[0].Index;
             comboproducts comboProduct = comboProducts[position];
-            chonThietBi = new ChonThietBi(comboProduct.id,comboProduct.product,comboProduct.product_amount, this);
+            chonThietBi = new ChonThietBiHoacCombo(comboProduct.id,comboProduct.product,comboProduct.product_amount, this);
             chonThietBi.ShowDialog();
         }
 

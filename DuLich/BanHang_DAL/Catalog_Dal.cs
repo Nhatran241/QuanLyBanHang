@@ -14,7 +14,7 @@ namespace DuLich.BanHang_Dal
     {
         static BanHangContext context = BanHangContext.GetInstance();
 
-        public static List<Catalog> GetAll()
+        public static List<catalog> GetAll()
         {
             return context.Catalogs.ToList();
         }

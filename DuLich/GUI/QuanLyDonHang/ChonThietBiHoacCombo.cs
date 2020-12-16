@@ -8,9 +8,9 @@ using DuLich.BanHang_Entity;
 using DuLich.BUS;
 using DuLich.GUI.QuanLyThietBi;
 
-namespace DuLich.GUI.QuanLyCombo
+namespace DuLich.GUI.QuanLyDonHang
 {
-    public partial class ChonThietBi : Form,DanhSachThietBi.IDanhSachThietBiChonThietBiListener
+    public partial class ChonThietBiHoacCombo : Form,DanhSachThietBi.IDanhSachThietBiChonThietBiListener
     {
         private bool isEditing = false;
         private product product;
@@ -18,7 +18,7 @@ namespace DuLich.GUI.QuanLyCombo
         private IChonThietBiListener chonThietBiListener;
         private IThayDoiSoLuongListener thayDoiSoLuongListener;
         private int maProductCombo;
-        public ChonThietBi(List<product> danhSachThietBiTrongCombo,IChonThietBiListener chonThietBiListener)
+        public ChonThietBiHoacCombo(List<product> danhSachThietBiTrongCombo,IChonThietBiListener chonThietBiListener)
         {
             InitializeComponent();
             this.chonThietBiListener = chonThietBiListener;
@@ -31,7 +31,7 @@ namespace DuLich.GUI.QuanLyCombo
             panel1.Controls.Clear();
             panel1.Controls.Add(new DanhSachThietBi(danhSachThietBi, Catalog_Dal.GetAll(), this));
         }
-        public ChonThietBi(int maComboProduct , product product , int soluong, IThayDoiSoLuongListener thayDoiSoLuongListener)
+        public ChonThietBiHoacCombo(int maComboProduct , product product , int soluong, IThayDoiSoLuongListener thayDoiSoLuongListener)
         {
             InitializeComponent();
             this.maProductCombo = maProductCombo;

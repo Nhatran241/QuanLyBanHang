@@ -5,45 +5,35 @@ using System.Windows.Forms;
 using DuLich.BanHang_Entity;
 using DuLich.BUS;
 
-namespace DuLich.GUI.QuanLyThietBi
+namespace DuLich.GUI.QuanLyDonHang
 {
-    public partial class TimKiemThietBi : UserControl
+    public partial class TimKiemDonHang : UserControl
     {
-        private List<catalog> catalogs = new List<catalog>();
-        private catalog filterCatalog = new catalog();
         private string filterTen = "";
         private long giatu = 0;
         private long giaden = long.MaxValue;
         private DateTime ngaytu = new DateTime();
         private DateTime ngayden = new DateTime();
-        private ITimKiemThietBiListener timKiemThietBiListener;
+        private ITimKiemCombo timKiemCombo;
         private bool initDataCompleted = false;
 
-        public TimKiemThietBi()
+        public TimKiemDonHang()
         {
             InitializeComponent();
         }
-        public void SetData(List<catalog> catalogs,DateTime ngaytu,DateTime ngayden,long giatu,long giaden,ITimKiemThietBiListener timKiemThietBiListener)
+        public void SetData(DateTime ngaytu,DateTime ngayden,long giatu,long giaden,ITimKiemCombo timKiemCombo)
         {
-            this.timKiemThietBiListener = timKiemThietBiListener;
-            this.catalogs.AddRange(catalogs);
+            this.timKiemCombo = timKiemCombo;
             this.ngaytu = ngaytu;
             this.ngayden = ngayden;
             this.giatu = giatu;
             this.giaden = giaden;
-            filterCatalog.id = -1;
-            filterCatalog.catalog_name = "Bất kỳ";
-            this.catalogs.Insert(0, filterCatalog);
             InitData();
         }
 
         private void InitData()
         {
-            foreach(catalog cat in catalogs)
-            {
-                cb_search.Items.Add(cat);
-            }
-            cb_search.SelectedItem = filterCatalog;
+         
             tb_pricefrom.Text = giatu.ToString("N0")+"đ";
             tb_priceto.Text = giaden.ToString("N0")+"đ";
             datepickbatdau.MaxDate = ngayden;
@@ -55,22 +45,17 @@ namespace DuLich.GUI.QuanLyThietBi
             initDataCompleted = true;
         }
 
-        private void cb_search_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            filterCatalog = catalogs[cb_search.SelectedIndex];
-            timKiemThietBiListener.onTimKiem(filterCatalog, filterTen,giatu,giaden,ngaytu,ngayden);
-        }
 
         private void tb_search_TextChanged(object sender, EventArgs e)
         {
             filterTen = tb_search.Text.Trim().ToLower();
-            if(timKiemThietBiListener != null)
-                timKiemThietBiListener.onTimKiem(filterCatalog, filterTen, giatu, giaden, ngaytu, ngayden);
+            if(timKiemCombo != null)
+                timKiemCombo.onTimKiem(filterTen, giatu, giaden, ngaytu, ngayden);
         }
 
-        public interface ITimKiemThietBiListener
+        public interface ITimKiemCombo
         {
-            void onTimKiem(catalog cat, string ten,long giatu,long giaden,DateTime ngaytu,DateTime ngayden);
+            void onTimKiem(string ten,long giatu,long giaden,DateTime ngaytu,DateTime ngayden);
         }
 
         private void datepickbatdau_ValueChanged(object sender, EventArgs e)
@@ -79,7 +64,7 @@ namespace DuLich.GUI.QuanLyThietBi
                 return;
             if (datepickbatdau.Value >= datepickketthuc.Value)
                 datepickketthuc.Value = datepickbatdau.Value;
-            timKiemThietBiListener.onTimKiem(filterCatalog, filterTen,giatu,giaden, datepickbatdau.Value, datepickketthuc.Value) ;
+            timKiemCombo.onTimKiem(filterTen,giatu,giaden, datepickbatdau.Value, datepickketthuc.Value) ;
         }
 
         private void datepickketthuc_ValueChanged(object sender, EventArgs e)
@@ -88,7 +73,7 @@ namespace DuLich.GUI.QuanLyThietBi
                 return;
             if (datepickketthuc.Value < datepickbatdau.Value)
                 datepickbatdau.Value = datepickketthuc.Value;
-            timKiemThietBiListener.onTimKiem(filterCatalog, filterTen, giatu, giaden, datepickbatdau.Value, datepickketthuc.Value);
+            timKiemCombo.onTimKiem(filterTen, giatu, giaden, datepickbatdau.Value, datepickketthuc.Value);
         }
 
         private void tb_pricefrom_TextChanged(object sender, EventArgs e)
@@ -110,7 +95,7 @@ namespace DuLich.GUI.QuanLyThietBi
                 tb_pricefrom.Text = "0đ";
                 giatu = 0;
             }
-            timKiemThietBiListener.onTimKiem(filterCatalog, filterTen, giatu, giaden, datepickbatdau.Value, datepickketthuc.Value);
+            timKiemCombo.onTimKiem(filterTen, giatu, giaden, datepickbatdau.Value, datepickketthuc.Value);
      
         }
 
@@ -152,7 +137,7 @@ namespace DuLich.GUI.QuanLyThietBi
                 tb_priceto.Text = "0đ";
                 giaden = 0;
             }
-            timKiemThietBiListener.onTimKiem(filterCatalog, filterTen, giatu, giaden, datepickbatdau.Value, datepickketthuc.Value);
+            timKiemCombo.onTimKiem(filterTen, giatu, giaden, datepickbatdau.Value, datepickketthuc.Value);
         }
     }
 }

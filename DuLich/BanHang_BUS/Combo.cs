@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace DuLich.BanHang_Entity
 {
-    public partial class Combo
+    public partial class combo
     {
         public Task AddOrUpdate()
         {
@@ -14,11 +14,11 @@ namespace DuLich.BanHang_Entity
         public long TotalPriceOfProductsCombo()
         {
             long tong = 0;
-            if (ComboProducts == null)
+            if (comboproducts == null)
                 return tong;
-            foreach(ComboProduct comboProduct in ComboProducts)
+            foreach(comboproducts comboProduct in comboproducts)
             {
-                tong += comboProduct.Product.Price * comboProduct.Product_Amount;
+                tong += comboProduct.product.price * comboProduct.product_amount;
             }
             return tong;
         }
@@ -26,16 +26,16 @@ namespace DuLich.BanHang_Entity
         public long TotalPriceOfCombo()
         {
             long totalPrice = TotalPriceOfProductsCombo();
-            return (totalPrice - (totalPrice * discountPercent)/100);
+            return (totalPrice - (totalPrice * discountpercent)/100);
         }
-        public List<ComboProduct> GetListComboProduct()
+        public List<comboproducts> GetListComboProduct()
         {
-            List<ComboProduct> comboProducts = new List<ComboProduct>();
-            if (ComboProducts == null)
+            List<comboproducts> comboProducts = new List<comboproducts>();
+            if (comboproducts == null)
                 return comboProducts;
-            foreach(ComboProduct comboProduct in ComboProducts)
+            foreach(comboproducts comboProduct in comboproducts)
             {
-                ComboProduct newCombo = new ComboProduct();
+                comboproducts newCombo = new comboproducts();
                 newCombo.Map(comboProduct);
                 comboProducts.Add(newCombo);
             }

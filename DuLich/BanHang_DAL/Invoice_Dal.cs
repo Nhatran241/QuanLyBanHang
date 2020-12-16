@@ -10,26 +10,26 @@ using System.Threading.Tasks;
 
 namespace DuLich.BanHang_Dal
 {
-    class Combo_Dal
+    class Invoice_Dal
     {
         static BanHangContext context = BanHangContext.GetInstance();
 
-        private static Combo_Dal instance;
-        public static Combo_Dal getInstance()
+        private static Invoice_Dal instance;
+        public static Invoice_Dal getInstance()
         {
             if (instance == null)
-                instance = new Combo_Dal();
+                instance = new Invoice_Dal();
             return instance;
 
         }
-        public List<combo> GetAll()
+        public List<invoice> GetAll()
         {
-            return context.Comboes.ToList();
+            return context.Invoices.ToList();
         }
 
-        public Task AddOrUpdate(combo combo)
+        public Task AddOrUpdate(invoice invoice)
         {
-            context.Comboes.AddOrUpdate(combo);
+            context.Invoices.AddOrUpdate(invoice);
             return context.SaveChangesAsync();
         }
     }

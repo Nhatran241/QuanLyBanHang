@@ -5,25 +5,25 @@ using System.Threading.Tasks;
 namespace DuLich.BanHang_Entity
 {
     
-    public partial class Storage
+    public partial class storage
     {
-        public void Map(Storage storage)
+        public void Map(storage storage)
         {
-            this.Amount = storage.Amount;
-            this.createTime = storage.createTime;
-            this.ID = storage.ID;
-            this.Product = storage.Product;
+            this.amount = storage.amount;
+            this.createtime = storage.createtime;
+            this.id = storage.id;
+            this.product = storage.product;
         }
 
         public Task AddOrUpdate(int difAmount)
         {
-            Product.Amount += difAmount;
+            product.amount += difAmount;
             return Storage_Dal.getInstance().AddOrUpdate(this);
         }
 
         public Task Delete()
         {
-            Product.Amount -= Amount;
+            product.amount -= amount;
             return Storage_Dal.getInstance().Delete(this);
         }
     }

@@ -6,20 +6,20 @@ namespace DuLich.BanHang_Entity
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Role")]
-    public partial class Role
+    [Table("role")]
+    public partial class role
     {
-        public Role()
+        public role()
         {
-            Employees = new HashSet<Employee>();
+            employees = new HashSet<employee>();
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public int id { get; set; }
 
         [Required]
-        public string Role_Name { get; set; }
+        public string role_name { get; set; }
 
-        public virtual ICollection<Employee> Employees { get; set; }
+        public virtual ICollection<employee> employees { get; set; }
     }
 }

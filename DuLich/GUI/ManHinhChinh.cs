@@ -75,7 +75,7 @@ namespace DuLich
         }
 
 
-        public void onDanhSachThietBi_DoubleClick(Product product)
+        public void onDanhSachThietBi_DoubleClick(product product)
         {
             chiTietThietBi = new ChiTietThietBi(product, Catalog_Dal.GetAll(),this);
             chiTietThietBi.ShowDialog();
@@ -83,17 +83,17 @@ namespace DuLich
 
         public void onDanhSachThietBi_ThemClick()
         {
-            Product product = new Product();
+            product product = new product();
             chiTietThietBi = new ChiTietThietBi(product, Catalog_Dal.GetAll(), this);
             chiTietThietBi.ShowDialog();
         }
 
-        public void onDanhSachThietBi_XoaClick(Product product)
+        public void onDanhSachThietBi_XoaClick(product product)
         {
             DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn xóa thiết bị này ", "", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                if(product.ComboProducts != null && product.ComboProducts.Count >0 || product.Storage != null && product.Storage.Count > 0)
+                if(product.comboproducts != null && product.comboproducts.Count >0 || product.storage != null && product.storage.Count > 0)
                 {
                     DialogResult kq = MessageBox.Show("Không thể xóa thiết bị này vì thiết bị đang thuộc combo hoặc đơn hàng khác", "", MessageBoxButtons.YesNo);
                 }
@@ -101,7 +101,7 @@ namespace DuLich
             }
         }
 
-        public void onLuuClick(Product product)
+        public void onLuuClick(product product)
         {
             product.AddOrUpdate().ContinueWith(task =>
             {
@@ -134,7 +134,7 @@ namespace DuLich
         {
             ShowDanhSachCombo();
         }
-        public void onDanhSachCombo_SuaClick(Combo combo)
+        public void onDanhSachCombo_SuaClick(combo combo)
         {
             chiTietCombo = new ChiTietCombo(combo, this);
             chiTietCombo.ShowDialog();
@@ -142,18 +142,18 @@ namespace DuLich
 
         public void onDanhSachCombo_ThemClick()
         {
-            Combo combo = new Combo();
+            combo combo = new combo();
             chiTietCombo = new ChiTietCombo(combo, this);
             chiTietCombo.ShowDialog();
 
         }
 
-        public void onDanhSachCombo_XoaClick(Combo combo)
+        public void onDanhSachCombo_XoaClick(combo combo)
         {
             
         }
 
-        public void onLuuClick(Combo combo)
+        public void onLuuClick(combo combo)
         {
             combo.AddOrUpdate().ContinueWith(task =>
             {
@@ -607,7 +607,7 @@ namespace DuLich
             showDanhSachXuatNhap();
         }
 
-        public void onDanhSachXuatNhap_SuaClick(Storage storage)
+        public void onDanhSachXuatNhap_SuaClick(storage storage)
         {
             chiTietXuatNhap = new ChiTietXuatNhap(storage, product_Dal.GetAll(), this);
             chiTietXuatNhap.ShowDialog();
@@ -615,17 +615,17 @@ namespace DuLich
 
         public void onDanhSachXuatNhap_ThemClick()
         {
-            Storage storage = new Storage();
+            storage storage = new storage();
             chiTietXuatNhap = new ChiTietXuatNhap(storage, product_Dal.GetAll(), this);
             chiTietXuatNhap.ShowDialog();
         }
 
-        public void onDanhSachXuatNhap_XoaClick(Storage storage)
+        public void onDanhSachXuatNhap_XoaClick(storage storage)
         {
             DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn xóa phiếu này không , khi xóa số lượng của thiết bị sẽ được cập nhật lại", "", MessageBoxButtons.YesNo);
             if (dialogResult == DialogResult.Yes)
             {
-                if(storage.Product.Amount - storage.Amount < 0)
+                if(storage.product.amount - storage.amount < 0)
                 {
                     DialogResult a = MessageBox.Show("Số lượng của thiết bị trong kho hiện tại không thể nhỏ hơn số lượng của phiếu nhập này", "", MessageBoxButtons.YesNo);
                     return;
@@ -642,7 +642,7 @@ namespace DuLich
 
         }
 
-        public void onLuuClick(Storage storage,int difAmount)
+        public void onLuuClick(storage storage,int difAmount)
         {
             storage.AddOrUpdate(difAmount).ContinueWith(task =>
              {

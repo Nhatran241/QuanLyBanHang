@@ -3,9 +3,9 @@ using DuLich.GUI.QuanLyTouris;
 using System;
 using System.Windows.Forms;
 
-namespace DuLich.GUI.QuanLyCombo
+namespace DuLich.GUI.QuanLyDonHang
 {
-    partial class DanhSachCombo
+    partial class DanhSachDonHang
     {
         /// <summary> 
         /// Required designer variable.
@@ -41,7 +41,7 @@ namespace DuLich.GUI.QuanLyCombo
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.search1 = new DuLich.GUI.QuanLyCombo.TimKiemCombo();
+            this.search1 = new TimKiemDonHang();
             this.btn_xoa = new System.Windows.Forms.Button();
             this.btn_them = new System.Windows.Forms.Button();
             this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -167,7 +167,7 @@ namespace DuLich.GUI.QuanLyCombo
 
         #endregion
         private System.Windows.Forms.BindingSource tourisBindingSource;
-        private TimKiemCombo search1;
+        private TimKiemDonHang search1;
         private Button btn_them;
         private Button btn_xoa;
         private BindingSource tourBindingSource;

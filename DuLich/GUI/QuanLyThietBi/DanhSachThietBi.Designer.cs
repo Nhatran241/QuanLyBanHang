@@ -157,7 +157,7 @@ namespace DuLich.GUI.QuanLyThietBi
             // 
             // productBindingSource
             // 
-            this.productBindingSource.DataSource = typeof(DuLich.BanHang_Entity.Product);
+            this.productBindingSource.DataSource = typeof(DuLich.BanHang_Entity.product);
             // 
             // tourBindingSource
             // 

@@ -13,14 +13,14 @@ namespace DuLich.GUI.QuanLyKhoHang
     public partial class DanhSachXuatNhap : UserControl,TimKiemKhoHang.ITimKiemKhoHangListener
     {
         private IDanhSachXuatNhapListener danhSachXuatNhapListener;
-        private List<Storage> storage_list;
-        private List<Product> products;
+        private List<storage> storage_list;
+        private List<product> products;
 
         public DanhSachXuatNhap()
         {
             InitializeComponent();
         }
-        public DanhSachXuatNhap(List<Storage> storages_list,List<Product> products, IDanhSachXuatNhapListener danhSachXuatNhapListener)
+        public DanhSachXuatNhap(List<storage> storages_list,List<product> products, IDanhSachXuatNhapListener danhSachXuatNhapListener)
         {
             InitializeComponent();
             this.danhSachXuatNhapListener = danhSachXuatNhapListener;
@@ -32,26 +32,26 @@ namespace DuLich.GUI.QuanLyKhoHang
 
         private void InitData()
         {
-            DateTime ngaytu = storage_list.First().createTime;
-            DateTime ngayden = storage_list.First().createTime;
-            long soluongtu = storage_list.First().Amount;
-            long soluongden = storage_list.First().Amount;
+            DateTime ngaytu = storage_list.First().createtime;
+            DateTime ngayden = storage_list.First().createtime;
+            long soluongtu = storage_list.First().amount;
+            long soluongden = storage_list.First().amount;
 
-            foreach (Storage storage in storage_list)
+            foreach (storage storage in storage_list)
             {
-                if (storage.createTime < ngaytu)
-                    ngaytu = storage.createTime;
-                if (storage.createTime > ngayden)
-                    ngayden = storage.createTime;
-                if (storage.Amount > soluongtu)
-                    soluongtu = storage.Amount;
-                if (storage.Amount < soluongden)
-                    soluongden = storage.Amount;
+                if (storage.createtime < ngaytu)
+                    ngaytu = storage.createtime;
+                if (storage.createtime > ngayden)
+                    ngayden = storage.createtime;
+                if (storage.amount > soluongtu)
+                    soluongtu = storage.amount;
+                if (storage.amount < soluongden)
+                    soluongden = storage.amount;
                 ListViewItem item = new ListViewItem(new string[] {
-                    storage.ID.ToString(),
-                    storage.Product.Product_Name,
-                    storage.Amount.ToString(),
-                    storage.createTime.ToString()
+                    storage.id.ToString(),
+                    storage.product.product_name,
+                    storage.amount.ToString(),
+                    storage.createtime.ToString()
                 }, -1);
                 lv_product.Items.Add(item);
             }
@@ -59,16 +59,16 @@ namespace DuLich.GUI.QuanLyKhoHang
             search1.SetData(products,ngaytu,ngayden,soluongtu,soluongden, this);
         }
 
-        private void initListViewData(List<Storage> newlist)
+        private void initListViewData(List<storage> newlist)
         {
             lv_product.Items.Clear();
-            foreach (Storage storage in newlist)
+            foreach (storage storage in newlist)
             {
                 ListViewItem item = new ListViewItem(new string[] {
-                    storage.ID.ToString(),
-                    storage.Product.Product_Name,
-                    storage.Amount.ToString(),
-                    storage.createTime.ToString()
+                    storage.id.ToString(),
+                    storage.product.product_name,
+                    storage.amount.ToString(),
+                    storage.createtime.ToString()
                 }, -1);
                 lv_product.Items.Add(item);
             }
@@ -76,9 +76,9 @@ namespace DuLich.GUI.QuanLyKhoHang
 
         public interface IDanhSachXuatNhapListener
         {
-            void onDanhSachXuatNhap_SuaClick(Storage storage);
+            void onDanhSachXuatNhap_SuaClick(storage storage);
             void onDanhSachXuatNhap_ThemClick();
-            void onDanhSachXuatNhap_XoaClick(Storage storage);
+            void onDanhSachXuatNhap_XoaClick(storage storage);
         }
       
 
@@ -95,31 +95,31 @@ namespace DuLich.GUI.QuanLyKhoHang
 
         }
 
-        public void onTimKiem(Product product, long soluongtu, long soluongden, DateTime ngaytu, DateTime ngayden,bool isNhap, bool isXuat)
+        public void onTimKiem(product product, long soluongtu, long soluongden, DateTime ngaytu, DateTime ngayden,bool isNhap, bool isXuat)
         {
-            if (product.ID != -1)
+            if (product.id != -1)
             {
                     if (isNhap && isXuat)
                     {
-                        initListViewData(storage_list.Where(c => c.Product.ID == product.ID
-                        && c.createTime >= ngaytu && c.createTime <= ngayden
-                        && Math.Abs(c.Amount) >= soluongtu && c.Amount <= soluongden
+                        initListViewData(storage_list.Where(c => c.product.id == product.id
+                        && c.createtime >= ngaytu && c.createtime <= ngayden
+                        && Math.Abs(c.amount) >= soluongtu && c.amount <= soluongden
                         ).ToList());
                     }
                     else if (isNhap)
                     {
-                        initListViewData(storage_list.Where(c => c.Product.ID == product.ID
-                        && c.createTime >= ngaytu && c.createTime <= ngayden
-                        && c.Amount > 0
-                        && c.Amount >= soluongtu && c.Amount <= soluongden
+                        initListViewData(storage_list.Where(c => c.product.id == product.id
+                        && c.createtime >= ngaytu && c.createtime <= ngayden
+                        && c.amount > 0
+                        && c.amount >= soluongtu && c.amount <= soluongden
                         ).ToList());
                     }
                     else if (isXuat)
                     {
-                        initListViewData(storage_list.Where(c => c.Product.ID == product.ID
-                       && c.createTime >= ngaytu && c.createTime <= ngayden
-                       && c.Amount < 0
-                       && Math.Abs(c.Amount) >= soluongtu && c.Amount <= soluongden
+                        initListViewData(storage_list.Where(c => c.product.id == product.id
+                       && c.createtime >= ngaytu && c.createtime <= ngayden
+                       && c.amount < 0
+                       && Math.Abs(c.amount) >= soluongtu && c.amount <= soluongden
                        ).ToList());
                     }
                     else
@@ -133,24 +133,24 @@ namespace DuLich.GUI.QuanLyKhoHang
                     if (isNhap && isXuat)
                     {
                         initListViewData(storage_list.Where(c => 
-                        c.createTime >= ngaytu && c.createTime <= ngayden
-                        && Math.Abs(c.Amount) >= soluongtu && c.Amount <= soluongden
+                        c.createtime >= ngaytu && c.createtime <= ngayden
+                        && Math.Abs(c.amount) >= soluongtu && c.amount <= soluongden
                         ).ToList());
                     }
                     else if (isNhap)
                     {
                         initListViewData(storage_list.Where(c =>
-                        c.createTime >= ngaytu && c.createTime <= ngayden
-                        && c.Amount > 0
-                        && c.Amount >= soluongtu && c.Amount <= soluongden
+                        c.createtime >= ngaytu && c.createtime <= ngayden
+                        && c.amount > 0
+                        && c.amount >= soluongtu && c.amount <= soluongden
                         ).ToList());
                     }
                     else if (isXuat)
                     {
                         initListViewData(storage_list.Where(c =>
-                       c.createTime >= ngaytu && c.createTime <= ngayden
-                       && c.Amount < 0
-                       && Math.Abs(c.Amount) >= soluongtu && c.Amount <= soluongden
+                       c.createtime >= ngaytu && c.createtime <= ngayden
+                       && c.amount < 0
+                       && Math.Abs(c.amount) >= soluongtu && c.amount <= soluongden
                        ).ToList());
                     }
                     else

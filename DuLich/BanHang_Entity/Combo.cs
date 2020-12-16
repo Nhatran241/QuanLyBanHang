@@ -6,39 +6,39 @@ namespace DuLich.BanHang_Entity
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Combo")]
-    public partial class Combo
+    [Table("combo")]
+    public partial class combo
     {
-        public Combo()
+        public combo()
         {
-            InvoiceDetails = new HashSet<InvoiceDetail>();
+            invoicedetails = new HashSet<invoicedetail>();
         }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public int id { get; set; }
 
         [Required]
-        public string Combo_Name { get; set; }
+        public string combo_name { get; set; }
 
         [Required]
-        public DateTime CreateTime { get; set; }
+        public DateTime createtime { get; set; }
 
         [Required]
-        public int discountPercent { get; set; }
+        public int discountpercent { get; set; }
 
-        public virtual ICollection<InvoiceDetail> InvoiceDetails { get; set; }
-        public virtual ICollection<ComboProduct> ComboProducts { get; set; }
+        public virtual ICollection<invoicedetail> invoicedetails { get; set; }
+        public virtual ICollection<comboproducts> comboproducts { get; set; }
 
 
-        public void Map(Combo combo)
+        public void Map(combo combo)
         {
-            this.ID = combo.ID;
-            this.Combo_Name = combo.Combo_Name;
-            this.ComboProducts = combo.ComboProducts;
-            this.discountPercent = combo.discountPercent;
-            this.CreateTime = combo.CreateTime;
-            this.InvoiceDetails = combo.InvoiceDetails;
+            this.id = combo.id;
+            this.combo_name = combo.combo_name;
+            this.comboproducts = combo.comboproducts;
+            this.discountpercent = combo.discountpercent;
+            this.createtime = combo.createtime;
+            this.invoicedetails = combo.invoicedetails;
         }
     }
 }

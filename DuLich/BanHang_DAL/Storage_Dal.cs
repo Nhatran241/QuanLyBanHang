@@ -22,19 +22,19 @@ namespace DuLich.BanHang_Dal
 
         }
 
-        public Task AddOrUpdate(Storage storage)
+        public Task AddOrUpdate(storage storage)
         {
             context.Storages.AddOrUpdate(storage);
             return context.SaveChangesAsync();
         }
 
-        public Task Delete(Storage storage)
+        public Task Delete(storage storage)
         {
             context.Storages.Remove(storage);
             return context.SaveChangesAsync();
         }
 
-        public List<Storage> GetAll()
+        public List<storage> GetAll()
         {
             return context.Storages.ToList();
         }

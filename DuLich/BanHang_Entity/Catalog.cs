@@ -6,25 +6,25 @@ namespace DuLich.BanHang_Entity
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Catalog")]
-    public partial class Catalog
+    [Table("catalog")]
+    public partial class catalog
     {
-        public Catalog()
+        public catalog()
         {
-            Products = new HashSet<Product>();
+            products = new HashSet<product>();
         }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public int id { get; set; }
 
         [Required]
-        public string Catalog_Name { get; set; }
-        public virtual ICollection<Product> Products { get; set; }
+        public string catalog_name { get; set; }
+        public virtual ICollection<product> products { get; set; }
 
         public override string ToString()
         {
-            return Catalog_Name;
+            return catalog_name;
         }
     }
 }

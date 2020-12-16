@@ -14,14 +14,14 @@ namespace DuLich.GUI.QuanLyThietBi
     {
         private IDanhSachThietBiListener danhSachThietBiListener;
         private IDanhSachThietBiChonThietBiListener chonThietBiListener;
-        private List<Product> product_list;
-        private List<Catalog> catalog_list;
+        private List<product> product_list;
+        private List<catalog> catalog_list;
 
         public DanhSachThietBi()
         {
             InitializeComponent();
         }
-        public DanhSachThietBi(List<Product> _products_list, List<Catalog> _catalog_list, IDanhSachThietBiListener danhSachThietBiListener)
+        public DanhSachThietBi(List<product> _products_list, List<catalog> _catalog_list, IDanhSachThietBiListener danhSachThietBiListener)
         {
             InitializeComponent();
             this.danhSachThietBiListener = danhSachThietBiListener;
@@ -29,7 +29,7 @@ namespace DuLich.GUI.QuanLyThietBi
             this.catalog_list = _catalog_list;
             InitData();
         }
-        public DanhSachThietBi(List<Product> _products_list, List<Catalog> _catalog_list, IDanhSachThietBiChonThietBiListener chonThietBiListener)
+        public DanhSachThietBi(List<product> _products_list, List<catalog> _catalog_list, IDanhSachThietBiChonThietBiListener chonThietBiListener)
         {
             InitializeComponent();
             this.chonThietBiListener = chonThietBiListener;
@@ -47,31 +47,31 @@ namespace DuLich.GUI.QuanLyThietBi
             }
 
 
-            DateTime ngaytu = product_list.First().CreateTime;
-            DateTime ngayden = product_list.First().CreateTime;
-            long giatu = product_list.First().Price;
-            long giaden = product_list.First().Price;
+            DateTime ngaytu = product_list.First().createtime;
+            DateTime ngayden = product_list.First().createtime;
+            long giatu = product_list.First().price;
+            long giaden = product_list.First().price;
 
-            foreach (Product product in product_list)
+            foreach (product product in product_list)
             {
-                if (product.CreateTime < ngaytu)
-                    ngaytu = product.CreateTime;
-                if (product.CreateTime > ngayden)
-                    ngayden = product.CreateTime;
-                if (product.Price > giaden)
-                    giaden = product.Price;
-                if (product.Price < giatu)
-                    giatu = product.Price;
+                if (product.createtime < ngaytu)
+                    ngaytu = product.createtime;
+                if (product.createtime > ngayden)
+                    ngayden = product.createtime;
+                if (product.price > giaden)
+                    giaden = product.price;
+                if (product.price < giatu)
+                    giatu = product.price;
                 ListViewItem item = new ListViewItem(new string[] {
-                    product.ID.ToString(),
-                    product.Product_Name,
-                    product.Price.ToString("N0")+"đ",
-                    product.DiscountPercent.ToString()+"%",
+                    product.id.ToString(),
+                    product.product_name,
+                    product.price.ToString("N0")+"đ",
+                    product.discountpercent.ToString()+"%",
                     product.PriceAfterDiscount().ToString("N0")+"đ",
-                    product.Amount.ToString(),
-                    product.Catalog.Catalog_Name,
-                    product.CreateTime.ToString(),
-                    product.Detail
+                    product.amount.ToString(),
+                    product.catalog.catalog_name,
+                    product.createtime.ToString(),
+                    product.detail
                 }, -1);
                 lv_product.Items.Add(item);
             }
@@ -79,21 +79,21 @@ namespace DuLich.GUI.QuanLyThietBi
             search1.SetData(catalog_list,ngaytu,ngayden,giatu,giaden, this);
         }
 
-        private void initListViewData(List<Product> newlist)
+        private void initListViewData(List<product> newlist)
         {
             lv_product.Items.Clear();
-            foreach (Product product in newlist)
+            foreach (product product in newlist)
             {
                 ListViewItem item = new ListViewItem(new string[] {
-                    product.ID.ToString(),
-                    product.Product_Name,
-                    product.Price.ToString("N0")+"đ",
-                    product.DiscountPercent.ToString()+"%",
+                    product.id.ToString(),
+                    product.product_name,
+                    product.price.ToString("N0")+"đ",
+                    product.discountpercent.ToString()+"%",
                     product.PriceAfterDiscount().ToString("N0")+"đ",
-                    product.Amount.ToString(),
-                    product.Catalog.Catalog_Name,
-                    product.CreateTime.ToString(),
-                    product.Detail
+                    product.amount.ToString(),
+                    product.catalog.catalog_name,
+                    product.createtime.ToString(),
+                    product.detail
                 }, -1);
                 lv_product.Items.Add(item);
             }
@@ -101,13 +101,13 @@ namespace DuLich.GUI.QuanLyThietBi
 
         public interface IDanhSachThietBiListener
         {
-            void onDanhSachThietBi_DoubleClick(Product product);
+            void onDanhSachThietBi_DoubleClick(product product);
             void onDanhSachThietBi_ThemClick();
-            void onDanhSachThietBi_XoaClick(Product product);
+            void onDanhSachThietBi_XoaClick(product product);
         }
         public interface IDanhSachThietBiChonThietBiListener
         {
-            void onDanhSachThietBi_DoubleClick(Product product);
+            void onDanhSachThietBi_DoubleClick(product product);
         }
 
 
@@ -129,39 +129,39 @@ namespace DuLich.GUI.QuanLyThietBi
 
         }
 
-        public void onTimKiem(Catalog cat, string ten, long giatu, long giaden, DateTime ngaytu, DateTime ngayden)
+        public void onTimKiem(catalog cat, string ten, long giatu, long giaden, DateTime ngaytu, DateTime ngayden)
         {
             if (!ten.Equals(""))
             {
-                if (cat.ID == -1)
+                if (cat.id == -1)
                 {
-                    initListViewData(product_list.Where(c => c.Product_Name.ToLower().Contains(ten)
-                        && c.CreateTime >= ngaytu && c.CreateTime <=ngayden
-                        && c.Price >= giatu && c.Price <= giaden
+                    initListViewData(product_list.Where(c => c.product_name.ToLower().Contains(ten)
+                        && c.createtime >= ngaytu && c.createtime <=ngayden
+                        && c.price >= giatu && c.price <= giaden
                     ).ToList());
                 }
                 else
                 {
-                    initListViewData(product_list.Where(c => c.Product_Name.ToLower().Contains(ten)
-                    && c.Catalog.ID == cat.ID
-                       && c.CreateTime >= ngaytu && c.CreateTime <= ngayden
-                       && c.Price >= giatu && c.Price <= giaden
+                    initListViewData(product_list.Where(c => c.product_name.ToLower().Contains(ten)
+                    && c.catalog.id == cat.id
+                       && c.createtime >= ngaytu && c.createtime <= ngayden
+                       && c.price >= giatu && c.price <= giaden
                    ).ToList());
                 }
             }
             else
             {
-                if (cat.ID == -1)
+                if (cat.id == -1)
                 {
-                    initListViewData(product_list.Where(c => c.CreateTime >= ngaytu && c.CreateTime <= ngayden
-                        && c.Price >= giatu && c.Price <= giaden
+                    initListViewData(product_list.Where(c => c.createtime >= ngaytu && c.createtime <= ngayden
+                        && c.price >= giatu && c.price <= giaden
                     ).ToList());
                 }
                 else
                 {
-                    initListViewData(product_list.Where(c => c.Catalog.ID == cat.ID
-                       && c.CreateTime >= ngaytu && c.CreateTime <= ngayden
-                       && c.Price >= giatu && c.Price <= giaden
+                    initListViewData(product_list.Where(c => c.catalog.id == cat.id
+                       && c.createtime >= ngaytu && c.createtime <= ngayden
+                       && c.price >= giatu && c.price <= giaden
                    ).ToList());
                 }
             }

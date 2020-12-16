@@ -7,23 +7,25 @@ using DuLich.BanHang_Entity;
 using DuLich.BUS;
 using DuLich.GUI.QuanLyTouris;
 
-namespace DuLich.GUI.QuanLyCombo
+namespace DuLich.GUI.QuanLyDonHang
 {
 
-    public partial class DanhSachCombo : UserControl,TimKiemCombo.ITimKiemCombo
+    public partial class DanhSachDonHang : UserControl,TimKiemDonHang.ITimKiemCombo
     {
-        private IDanhSachComboListener danhSachComboListener;
+        private IDanhSachDonHangListener danhSachDonHangListener;
         private List<combo> combo_list;
+        private List<product> product_list;
 
-        public DanhSachCombo()
+        public DanhSachDonHang()
         {
             InitializeComponent();
         }
-        public DanhSachCombo(List<combo> _combo_list, IDanhSachComboListener danhSachComboListener)
+        public DanhSachDonHang(List<combo> _combo_list,List<product> _product_list, IDanhSachDonHangListener danhSachDonHangListener)
         {
             InitializeComponent();
-            this.danhSachComboListener = danhSachComboListener;
+            this.danhSachDonHangListener = danhSachDonHangListener;
             this.combo_list = _combo_list;
+            this.product_list = _product_list;
             if(combo_list.Count > 0) 
                 InitData();
         }
@@ -75,17 +77,17 @@ namespace DuLich.GUI.QuanLyCombo
             }
         }
 
-        public interface IDanhSachComboListener
+        public interface IDanhSachDonHangListener
         {
-            void onDanhSachCombo_SuaClick(combo combo);
-            void onDanhSachCombo_ThemClick();
-            void onDanhSachCombo_XoaClick(combo combo);
+            void onDanhSachDonHang_SuaClick(invoice invoice);
+            void onDanhSachDonHang_ThemClick();
+            void onDanhSachDonHang_XoaClick(invoice invoice);
         }
 
 
         private void btn_them_Click(object sender, EventArgs e)
         {
-            danhSachComboListener.onDanhSachCombo_ThemClick();
+            danhSachDonHangListener.onDanhSachDonHang_ThemClick();
         }
 
         private void btn_xoa_Click(object sender, EventArgs e)
@@ -94,7 +96,7 @@ namespace DuLich.GUI.QuanLyCombo
             if (lv_combo.SelectedItems.Count <= 0)
                 return;
             int position = lv_combo.SelectedItems[0].Index;
-            danhSachComboListener.onDanhSachCombo_XoaClick(combo_list.ToList()[position]);
+           // danhSachDonHangListener.onDanhSachDonHang_XoaClick(combo_list.ToList()[position]);
         }
 
         private void tourisBindingSource_CurrentChanged(object sender, EventArgs e)
@@ -124,7 +126,7 @@ namespace DuLich.GUI.QuanLyCombo
             if (lv_combo.SelectedItems.Count <= 0)
                 return;
             int position = lv_combo.SelectedItems[0].Index;
-            danhSachComboListener.onDanhSachCombo_SuaClick(combo_list.ToList()[position]);
+            //danhSachComboListener.onDanhSachCombo_SuaClick(combo_list.ToList()[position]);
 
         }
     }

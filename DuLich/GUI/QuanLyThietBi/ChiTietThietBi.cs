@@ -10,43 +10,43 @@ namespace DuLich.GUI.QuanLyThietBi
 {
     public partial class ChiTietThietBi : Form
     {
-        private Product product;
-        private Product tmpProduct;
-        private List<Catalog> catalogs;
+        private product product;
+        private product tmpProduct;
+        private List<catalog> catalogs;
         private bool isEditing = false;
         private IChiTietThietBiListener chiTietThietBiListener;
-        public ChiTietThietBi(Product product,List<Catalog> catalogs,IChiTietThietBiListener chiTietThietBiListener)
+        public ChiTietThietBi(product product,List<catalog> catalogs,IChiTietThietBiListener chiTietThietBiListener)
         {
             InitializeComponent();
             this.product = product;
             this.catalogs = catalogs;
             this.chiTietThietBiListener = chiTietThietBiListener;
-            tmpProduct = new Product();
+            tmpProduct = new product();
             tmpProduct.Map(this.product);
             InitUI();
         }
 
         private void InitUI()
         {
-            if (product.ID == 0)
+            if (product.id == 0)
             {
                 // Create new
-                tmpProduct.CreateTime = DateTime.Now;
-                tmpProduct.Price = 0;
-                tmpProduct.DiscountPercent = 0;
-                tmpProduct.Catalog = catalogs.FirstOrDefault();
-                tmpProduct.Amount = 0;
+                tmpProduct.createtime = DateTime.Now;
+                tmpProduct.price = 0;
+                tmpProduct.discountpercent = 0;
+                tmpProduct.catalog = catalogs.FirstOrDefault();
+                tmpProduct.amount = 0;
             }
-            foreach (Catalog catalog in catalogs)
+            foreach (catalog catalog in catalogs)
             {
                 cb_danhmuc.Items.Add(catalog);
             }
-            tb_tenthietbi.Text = tmpProduct.Product_Name;
-            tb_soluong.Text = tmpProduct.Amount.ToString();
-            tb_gia.Text = tmpProduct.Price.ToString();
-            tb_giamgia.Text = tmpProduct.DiscountPercent.ToString();
-            tb_chitiet.Text = tmpProduct.Detail;
-            cb_danhmuc.SelectedItem = tmpProduct.Catalog;
+            tb_tenthietbi.Text = tmpProduct.product_name;
+            tb_soluong.Text = tmpProduct.amount.ToString();
+            tb_gia.Text = tmpProduct.price.ToString();
+            tb_giamgia.Text = tmpProduct.discountpercent.ToString();
+            tb_chitiet.Text = tmpProduct.detail;
+            cb_danhmuc.SelectedItem = tmpProduct.catalog;
             updateGiaSauGiam();
         }
 
@@ -66,9 +66,9 @@ namespace DuLich.GUI.QuanLyThietBi
         {
             chiTietThietBiListener.onHuyChiTietThietBiClick();
         }
-        private bool Validation(Product product)
+        private bool Validation(product product)
         {
-            if (string.IsNullOrEmpty(product.Product_Name) || product.Catalog == null)
+            if (string.IsNullOrEmpty(product.product_name) || product.catalog == null)
                 return false;
             return true;
         }
@@ -80,18 +80,18 @@ namespace DuLich.GUI.QuanLyThietBi
 
         public interface IChiTietThietBiListener
         {
-            void onLuuClick(Product product);
+            void onLuuClick(product product);
             void onHuyChiTietThietBiClick();
         }
 
         private void tb_tenthietbi_TextChanged(object sender, EventArgs e)
         {
-            tmpProduct.Product_Name = tb_tenthietbi.Text.Trim();
+            tmpProduct.product_name = tb_tenthietbi.Text.Trim();
         }
 
         private void cb_danhmuc_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tmpProduct.Catalog = catalogs.ToArray()[cb_danhmuc.SelectedIndex];
+            tmpProduct.catalog = catalogs.ToArray()[cb_danhmuc.SelectedIndex];
         }
 
         private void tb_soluong_TextChanged(object sender, EventArgs e)
@@ -108,13 +108,13 @@ namespace DuLich.GUI.QuanLyThietBi
                 tb_gia.Text = long.Parse(number).ToString("N0") + "đ";
                 tb_gia.Focus();
                 tb_gia.SelectionStart = tb_gia.Text.Length - 1;
-                tmpProduct.Price = long.Parse(number);
+                tmpProduct.price = long.Parse(number);
 
             }
             else
             {
                 tb_gia.Text = "0đ";
-                tmpProduct.Price = 0;
+                tmpProduct.price = 0;
             }
             updateGiaSauGiam();
         }
@@ -136,14 +136,14 @@ namespace DuLich.GUI.QuanLyThietBi
                     tb_giamgia.Text = "100%";
                     tb_giamgia.Focus();
                     tb_giamgia.SelectionStart = tb_giamgia.Text.Length - 1;
-                    tmpProduct.DiscountPercent = 100;
+                    tmpProduct.discountpercent = 100;
                 }
                 else
                 {
                     tb_giamgia.Text = percent + "%";
                     tb_giamgia.Focus();
                     tb_giamgia.SelectionStart = tb_giamgia.Text.Length - 1;
-                    tmpProduct.DiscountPercent = percent;
+                    tmpProduct.discountpercent = percent;
                 }
             }
             else
@@ -151,14 +151,14 @@ namespace DuLich.GUI.QuanLyThietBi
                 tb_giamgia.Text = "0%";
                 tb_giamgia.Focus();
                 tb_giamgia.SelectionStart = tb_giamgia.Text.Length - 1;
-                tmpProduct.DiscountPercent = 0;
+                tmpProduct.discountpercent = 0;
             }
             updateGiaSauGiam();
         }
 
         private void tb_chitiet_TextChanged(object sender, EventArgs e)
         {
-            tmpProduct.Detail = tb_chitiet.Text.Trim();
+            tmpProduct.detail = tb_chitiet.Text.Trim();
         }
 
 

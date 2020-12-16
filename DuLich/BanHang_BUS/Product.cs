@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DuLich.BanHang_Entity
 {
-    public partial class Product
+    public partial class product
     {
        public Task AddOrUpdate()
         {
@@ -17,17 +17,17 @@ namespace DuLich.BanHang_Entity
 
         public long PriceAfterDiscount()
         {
-            return (Price - (Price * DiscountPercent) / 100);
+            return (price - (price * discountpercent) / 100);
         }
 
         public int GetAmountInStorageByTime(DateTime time)
         {
-            int amount = Amount;
-            foreach(Storage storages in Storage)
+            int amount = this.amount;
+            foreach(storage storages in storage)
             {
-                if(storages.createTime.Day > time.Day)
+                if(storages.createtime.Day > time.Day)
                 {
-                    amount -= storages.Amount;
+                    amount -= storages.amount;
                 }
             }
             return amount;

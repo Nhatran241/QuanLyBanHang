@@ -2,7 +2,6 @@
 {
     using System;
     using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
     public partial class BanHangContext : DbContext
@@ -15,23 +14,23 @@
             return instance;
         }
         public BanHangContext()
-            : base("name=BanHangContext")
+            : base("name=banhang")
         {
             if(Roles.ToList().Count == 0 && Catalogs.ToList().Count == 0 && Customers.ToList().Count==0 && Employees.ToList().Count==0 && Products.ToList().Count==0)
             {
-                Role admin = new Role { Role_Name = "admin" };
-                Role shipper = new Role { Role_Name = "shipper" };
-                Role nhanvien = new Role { Role_Name = "nhanvien" };
+                role admin = new role { role_name = "admin" };
+                role shipper = new role { role_name = "shipper" };
+                role nhanvien = new role { role_name = "nhanvien" };
 
                 Roles.Add(admin);
                 Roles.Add(shipper);
                 Roles.Add(nhanvien);
 
-                Catalog vitinh = new Catalog { Catalog_Name = "Máy vi tính" };
-                Catalog banphim = new Catalog { Catalog_Name = "Bàn phím" };
-                Catalog chuot = new Catalog { Catalog_Name = "Chuột" };
-                Catalog tainghe = new Catalog { Catalog_Name = "Tai nghe" };
-                Catalog loa = new Catalog { Catalog_Name = "Loa" };
+                catalog vitinh = new catalog { catalog_name = "Máy vi tính" };
+                catalog banphim = new catalog { catalog_name = "Bàn phím" };
+                catalog chuot = new catalog { catalog_name = "Chuột" };
+                catalog tainghe = new catalog { catalog_name = "Tai nghe" };
+                catalog loa = new catalog { catalog_name = "Loa" };
 
                 Catalogs.Add(vitinh);
                 Catalogs.Add(banphim);
@@ -39,59 +38,59 @@
                 Catalogs.Add(tainghe);
                 Catalogs.Add(loa);
 
-                Customer khach1 = new Customer { username = "abc", password = "abc", firstName = "Trần Minh", lastName = "Nhật", birthDate = DateTime.Now.AddDays(-365 * 20), address = "TPHCM", joinDate = DateTime.Now, gender = true };
-                Customer khach2 = new Customer { username = "123", password = "abc", firstName = "Trần Minh", lastName = "A", birthDate = DateTime.Now.AddDays(-365 * 20), address = "TPHCM", joinDate = DateTime.Now, gender = true };
-                Customer khach3 = new Customer { username = "456", password = "abc", firstName = "Trần Minh", lastName = "B", birthDate = DateTime.Now.AddDays(-365 * 20), address = "TPHCM", joinDate = DateTime.Now, gender = true };
+                customer khach1 = new customer { username = "abc", password = "abc", firstname = "Trần Minh", lastname = "Nhật", birthdate = DateTime.Now.AddDays(-365 * 20), address = "TPHCM", joindate = DateTime.Now, gender = true };
+                customer khach2 = new customer { username = "123", password = "abc", firstname = "Trần Minh", lastname = "A", birthdate = DateTime.Now.AddDays(-365 * 20), address = "TPHCM", joindate = DateTime.Now, gender = true };
+                customer khach3 = new customer { username = "456", password = "abc", firstname = "Trần Minh", lastname = "B", birthdate = DateTime.Now.AddDays(-365 * 20), address = "TPHCM", joindate = DateTime.Now, gender = true };
 
                 Customers.Add(khach1);
                 Customers.Add(khach2);
                 Customers.Add(khach3);
 
-                Employee employee1 = new Employee { username = "admin", password = "admin", firstName = "Trần Minh", lastName = "Nhật", birthDate = DateTime.Now.AddDays(-365 * 20), address = "TPHCM", joinDate = DateTime.Now, gender = true, Role = admin };
-                Employee employee2 = new Employee { username = "nhanvien", password = "nhanvien", firstName = "Trần Minh", lastName = "Nhan Vien", birthDate = DateTime.Now.AddDays(-365 * 20), address = "TPHCM", joinDate = DateTime.Now, gender = true, Role = nhanvien };
+                employee employee1 = new employee { username = "admin", password = "admin", firstname = "Trần Minh", lastname = "Nhật", birthdate = DateTime.Now.AddDays(-365 * 20), address = "TPHCM", joindate = DateTime.Now, gender = true, role = admin };
+                employee employee2 = new employee { username = "nhanvien", password = "nhanvien", firstname = "Trần Minh", lastname = "Nhan Vien", birthdate = DateTime.Now.AddDays(-365 * 20), address = "TPHCM", joindate = DateTime.Now, gender = true, role = nhanvien };
 
                 Employees.Add(employee1);
                 Employees.Add(employee2);
 
-                Product product1 = new Product
+                product product1 = new product
                 {
-                    Product_Name = "Laptop Acer Aspire 3 A315 56 36YS i3 1005G1 (NX.HS5SV.008)",
-                    Catalog = vitinh,
-                    Amount = 10,
-                    Price = 13690000,
-                    DiscountPercent = 10,
-                    CreateTime = DateTime.Now,
-                    Detail = "CPU: Intel Core i3 Ice Lake, 1005G1, 1.20 GHz;RAM: 8 GB, DDR4 (On board 4GB +1 khe 4GB), 2400 MHz;Ổ cứng: SSD 512 GB M.2 PCIe, Hỗ trợ khe cắm HDD SATA;Màn hình: 15.6 inch, Full HD (1920 x 1080);Card màn hình: Card đồ họa tích hợp, Intel UHD Graphics;Cổng kết nối: 2 x USB 2.0, USB 3.1, HDMI, LAN (RJ45);Hệ điều hành: Windows 10 Home SL;Thiết kế: Vỏ nhựa, PIN liền;Kích thước: Dày 19.9 mm, 1.7 kg",
+                    product_name = "Laptop Acer Aspire 3 A315 56 36YS i3 1005G1 (NX.HS5SV.008)",
+                    catalog = vitinh,
+                    amount = 10,
+                    price = 13690000,
+                    discountpercent = 10,
+                    createtime = DateTime.Now,
+                    detail = "CPU: Intel Core i3 Ice Lake, 1005G1, 1.20 GHz;RAM: 8 GB, DDR4 (On board 4GB +1 khe 4GB), 2400 MHz;Ổ cứng: SSD 512 GB M.2 PCIe, Hỗ trợ khe cắm HDD SATA;Màn hình: 15.6 inch, Full HD (1920 x 1080);Card màn hình: Card đồ họa tích hợp, Intel UHD Graphics;Cổng kết nối: 2 x USB 2.0, USB 3.1, HDMI, LAN (RJ45);Hệ điều hành: Windows 10 Home SL;Thiết kế: Vỏ nhựa, PIN liền;Kích thước: Dày 19.9 mm, 1.7 kg",
                 };
-                Product product2 = new Product
+                product product2 = new product
                 {
-                    Product_Name = "Laptop Asus Gaming Rog Strix G512 i7 10750H/144Hz (IAL001T)",
-                    Catalog = vitinh,
-                    Amount = 10,
-                    Price = 13690000,
-                    DiscountPercent = 10,
-                    CreateTime = DateTime.Now,
-                    Detail = "CPU: Intel Core i3 Ice Lake, 1005G1, 1.20 GHz; RAM: 8 GB, DDR4(On board 4GB + 1 khe 4GB), 2400 MHz; Ổ cứng: SSD 512 GB M.2 PCIe, Hỗ trợ khe cắm HDD SATA; Màn hình: 15.6 inch, Full HD(1920 x 1080); Card màn hình: Card đồ họa tích hợp, Intel UHD Graphics; Cổng kết nối: 2 x USB 2.0, USB 3.1, HDMI, LAN(RJ45); Hệ điều hành: Windows 10 Home SL; Thiết kế: Vỏ nhựa, PIN liền; Kích thước: Dày 19.9 mm, 1.7 kg"
+                    product_name = "Laptop Asus Gaming Rog Strix G512 i7 10750H/144Hz (IAL001T)",
+                    catalog = vitinh,
+                    amount = 10,
+                    price = 13690000,
+                    discountpercent = 10,
+                    createtime = DateTime.Now,
+                    detail = "CPU: Intel Core i3 Ice Lake, 1005G1, 1.20 GHz; RAM: 8 GB, DDR4(On board 4GB + 1 khe 4GB), 2400 MHz; Ổ cứng: SSD 512 GB M.2 PCIe, Hỗ trợ khe cắm HDD SATA; Màn hình: 15.6 inch, Full HD(1920 x 1080); Card màn hình: Card đồ họa tích hợp, Intel UHD Graphics; Cổng kết nối: 2 x USB 2.0, USB 3.1, HDMI, LAN(RJ45); Hệ điều hành: Windows 10 Home SL; Thiết kế: Vỏ nhựa, PIN liền; Kích thước: Dày 19.9 mm, 1.7 kg"
                 };
-                Product product3 = new Product
+                product product3 = new product
                 {
-                    Product_Name = "Bàn phím Newmen GM368",
-                    Catalog = banphim,
-                    Amount = 6,
-                    Price = 790000,
-                    DiscountPercent = 5,
-                    CreateTime = DateTime.Now,
-                    Detail = "CPU: Intel Core i3 Ice Lake, 1005G1, 1.20 GHz; RAM: 8 GB, DDR4(On board 4GB + 1 khe 4GB), 2400 MHz; Ổ cứng: SSD 512 GB M.2 PCIe, Hỗ trợ khe cắm HDD SATA; Màn hình: 15.6 inch, Full HD(1920 x 1080); Card màn hình: Card đồ họa tích hợp, Intel UHD Graphics; Cổng kết nối: 2 x USB 2.0, USB 3.1, HDMI, LAN(RJ45); Hệ điều hành: Windows 10 Home SL; Thiết kế: Vỏ nhựa, PIN liền; Kích thước: Dày 19.9 mm, 1.7 kg"
+                    product_name = "Bàn phím Newmen GM368",
+                    catalog = banphim,
+                    amount = 6,
+                    price = 790000,
+                    discountpercent = 5,
+                    createtime = DateTime.Now,
+                    detail = "CPU: Intel Core i3 Ice Lake, 1005G1, 1.20 GHz; RAM: 8 GB, DDR4(On board 4GB + 1 khe 4GB), 2400 MHz; Ổ cứng: SSD 512 GB M.2 PCIe, Hỗ trợ khe cắm HDD SATA; Màn hình: 15.6 inch, Full HD(1920 x 1080); Card màn hình: Card đồ họa tích hợp, Intel UHD Graphics; Cổng kết nối: 2 x USB 2.0, USB 3.1, HDMI, LAN(RJ45); Hệ điều hành: Windows 10 Home SL; Thiết kế: Vỏ nhựa, PIN liền; Kích thước: Dày 19.9 mm, 1.7 kg"
                 };
-                Product product4 = new Product
+                product product4 = new product
                 {
-                    Product_Name = "Bàn phím E-Dra EK311",
-                    Catalog = banphim,
-                    Amount = 3,
-                    Price = 660000,
-                    DiscountPercent = 5,
-                    CreateTime = DateTime.Now,
-                    Detail = "CPU: Intel Core i3 Ice Lake, 1005G1, 1.20 GHz; RAM: 8 GB, DDR4(On board 4GB + 1 khe 4GB), 2400 MHz; Ổ cứng: SSD 512 GB M.2 PCIe, Hỗ trợ khe cắm HDD SATA; Màn hình: 15.6 inch, Full HD(1920 x 1080); Card màn hình: Card đồ họa tích hợp, Intel UHD Graphics; Cổng kết nối: 2 x USB 2.0, USB 3.1, HDMI, LAN(RJ45); Hệ điều hành: Windows 10 Home SL; Thiết kế: Vỏ nhựa, PIN liền; Kích thước: Dày 19.9 mm, 1.7 kg"
+                    product_name = "Bàn phím E-Dra EK311",
+                    catalog = banphim,
+                    amount = 3,
+                    price = 660000,
+                    discountpercent = 5,
+                    createtime = DateTime.Now,
+                    detail = "CPU: Intel Core i3 Ice Lake, 1005G1, 1.20 GHz; RAM: 8 GB, DDR4(On board 4GB + 1 khe 4GB), 2400 MHz; Ổ cứng: SSD 512 GB M.2 PCIe, Hỗ trợ khe cắm HDD SATA; Màn hình: 15.6 inch, Full HD(1920 x 1080); Card màn hình: Card đồ họa tích hợp, Intel UHD Graphics; Cổng kết nối: 2 x USB 2.0, USB 3.1, HDMI, LAN(RJ45); Hệ điều hành: Windows 10 Home SL; Thiết kế: Vỏ nhựa, PIN liền; Kích thước: Dày 19.9 mm, 1.7 kg"
                 };
 
                 Products.Add(product1);
@@ -103,62 +102,56 @@
             }
         }
 
-        public virtual DbSet<Catalog> Catalogs { get; set; }
-        public virtual DbSet<Combo> Comboes { get; set; }
-        public virtual DbSet<Customer> Customers { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<Invoice> Invoices { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<Storage> Storages { get; set; }
-        public virtual DbSet<InvoiceDetail> InvoiceDetails { get; set; }
+        public virtual DbSet<catalog> Catalogs { get; set; }
+        public virtual DbSet<combo> Comboes { get; set; }
+        public virtual DbSet<customer> Customers { get; set; }
+        public virtual DbSet<employee> Employees { get; set; }
+        public virtual DbSet<invoice> Invoices { get; set; }
+        public virtual DbSet<product> Products { get; set; }
+        public virtual DbSet<role> Roles { get; set; }
+        public virtual DbSet<storage> Storages { get; set; }
+        public virtual DbSet<invoicedetail> InvoiceDetails { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Catalog>()
-                .HasMany(e => e.Products)
-                .WithOptional(e => e.Catalog);
+            modelBuilder.Entity<catalog>()
+                .HasMany(e => e.products)
+                .WithOptional(e => e.catalog);
 
-            modelBuilder.Entity<Combo>()
-                .HasMany(e => e.InvoiceDetails)
-                .WithOptional(e => e.Combo);
+            modelBuilder.Entity<combo>()
+                .HasMany(e => e.invoicedetails)
+                .WithOptional(e => e.combo);
 
-            modelBuilder.Entity<Customer>()
-                .HasMany(e => e.Invoices)
-                .WithRequired(e => e.Customer)
+            modelBuilder.Entity<customer>()
+                .HasMany(e => e.invoices)
+                .WithRequired(e => e.customer)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Employee>()
-                .HasMany(e => e.Invoices)
-                .WithOptional(e => e.Shipper);
-
-            modelBuilder.Entity<Invoice>()
-                .HasMany(e => e.InvoiceDetails)
-                .WithRequired(e => e.Invoice)
+            modelBuilder.Entity<invoice>()
+                .HasMany(e => e.invoicedetails)
+                .WithRequired(e => e.invoice)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Product>()
-                .HasMany(e => e.InvoiceDetails)
-                .WithRequired(e => e.Product)
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<product>()
+                .HasMany(e => e.invoicedetails);
 
-            modelBuilder.Entity<Product>()
-               .HasMany(e => e.Storage)
-               .WithRequired(e => e.Product)
+            modelBuilder.Entity<product>()
+               .HasMany(e => e.storage)
+               .WithRequired(e => e.product)
                .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Role>()
-                .HasMany(e => e.Employees)
-                .WithRequired(e => e.Role)
+            modelBuilder.Entity<role>()
+                .HasMany(e => e.employees)
+                .WithRequired(e => e.role)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Combo>()
-               .HasMany(e => e.ComboProducts)
-               .WithRequired(e => e.Combo)
+            modelBuilder.Entity<combo>()
+               .HasMany(e => e.comboproducts)
+               .WithRequired(e => e.combo)
                .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Product>()
-               .HasMany(e => e.ComboProducts);
+            modelBuilder.Entity<product>()
+               .HasMany(e => e.comboproducts);
 
 
         }

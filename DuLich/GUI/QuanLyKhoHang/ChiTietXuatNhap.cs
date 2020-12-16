@@ -10,18 +10,18 @@ namespace DuLich.GUI.QuanLyKhoHang
 {
     public partial class ChiTietXuatNhap : Form
     {
-        private Storage storage;
-        private Storage tmpStorage;
-        private List<Product> products;
+        private storage storage;
+        private storage tmpStorage;
+        private List<product> products;
         private bool isEditing = false;
         private IChiTietXuatNhapListener chiTietXuatNhapListener;
-        public ChiTietXuatNhap(Storage storage,List<Product> products,IChiTietXuatNhapListener chiTietXuatNhapListener)
+        public ChiTietXuatNhap(storage storage,List<product> products,IChiTietXuatNhapListener chiTietXuatNhapListener)
         {
             InitializeComponent();
             this.storage = storage;
             this.products = products;
             this.chiTietXuatNhapListener = chiTietXuatNhapListener;
-            tmpStorage = new Storage();
+            tmpStorage = new storage();
             tmpStorage.Map(this.storage);
             InitUI();
         }
@@ -29,22 +29,22 @@ namespace DuLich.GUI.QuanLyKhoHang
         private void InitUI()
         {
            
-            if (tmpStorage.ID == 0)
+            if (tmpStorage.id == 0)
             {
                 // Create new
-                tmpStorage.createTime = DateTime.Now;
-                tmpStorage.Product = products.First();
+                tmpStorage.createtime = DateTime.Now;
+                tmpStorage.product = products.First();
             }else
             {
                 cb_loaiphieu.Enabled = false;
                 cb_sanpham.Enabled = false;
             }
-            foreach (Product product in products)
+            foreach (product product in products)
             {
                 cb_sanpham.Items.Add(product);
             }
-            cb_sanpham.SelectedItem = tmpStorage.Product;
-            if (tmpStorage.Amount > 0)
+            cb_sanpham.SelectedItem = tmpStorage.product;
+            if (tmpStorage.amount > 0)
             {
                 cb_loaiphieu.SelectedIndex = 0;
             }
@@ -53,19 +53,19 @@ namespace DuLich.GUI.QuanLyKhoHang
 
         private void btn_luu_Click(object sender, EventArgs e)
         {
-            if(tmpStorage.Amount == 0)
+            if(tmpStorage.amount == 0)
             {
                 MessageBox.Show("Vui lòng nhập số lượng");
                 return;
             }
-            if (cb_loaiphieu.SelectedIndex == 1 && tmpStorage.Product.Amount < tmpStorage.Amount)
+            if (cb_loaiphieu.SelectedIndex == 1 && tmpStorage.product.amount < tmpStorage.amount)
             {
-                MessageBox.Show("Sản phẩm không đủ số lượng để xuất , số lượng sản phẩm trong kho là : " + tmpStorage.Product.Amount);
+                MessageBox.Show("Sản phẩm không đủ số lượng để xuất , số lượng sản phẩm trong kho là : " + tmpStorage.product.amount);
                 return;
             }
             if (cb_loaiphieu.SelectedIndex == 1)
-                tmpStorage.Amount = -tmpStorage.Amount;
-            int difAmount = tmpStorage.Amount - storage.Amount;
+                tmpStorage.amount = -tmpStorage.amount;
+            int difAmount = tmpStorage.amount - storage.amount;
             storage.Map(tmpStorage);
             chiTietXuatNhapListener.onLuuClick(storage,difAmount);
         }
@@ -82,7 +82,7 @@ namespace DuLich.GUI.QuanLyKhoHang
 
         public interface IChiTietXuatNhapListener
         {
-            void onLuuClick(Storage storage,int difAmount);
+            void onLuuClick(storage storage,int difAmount);
             void onHuyChiTietXuatNhapClick();
         }
 
@@ -92,12 +92,12 @@ namespace DuLich.GUI.QuanLyKhoHang
             string number = numberOnly(tb_soluong.Text.ToString());
             if (number.Length > 0)
             {
-                tmpStorage.Amount = int.Parse(number);
+                tmpStorage.amount = int.Parse(number);
 
             }
             else
             {
-                tmpStorage.Amount = 0;
+                tmpStorage.amount = 0;
             }
         }
         private string numberOnly(string v)
@@ -121,7 +121,7 @@ namespace DuLich.GUI.QuanLyKhoHang
 
         private void sanpham_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tmpStorage.Product = products.ToArray()[cb_sanpham.SelectedIndex];
+            tmpStorage.product = products.ToArray()[cb_sanpham.SelectedIndex];
         }
     }
 }
