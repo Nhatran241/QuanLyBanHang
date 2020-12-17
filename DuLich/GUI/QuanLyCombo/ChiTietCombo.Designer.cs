@@ -237,6 +237,7 @@ namespace DuLich.GUI.QuanLyCombo
             this.tb_tonggiasanpham.ReadOnly = true;
             this.tb_tonggiasanpham.Size = new System.Drawing.Size(196, 26);
             this.tb_tonggiasanpham.TabIndex = 33;
+            this.tb_tonggiasanpham.TextChanged += new System.EventHandler(this.tb_tonggiasanpham_TextChanged);
             // 
             // ChiTietCombo
             // 

@@ -6,6 +6,7 @@ using DuLich.GUI.QuanLyChiPhi;
 using DuLich.GUI.QuanLyCombo;
 using DuLich.GUI.QuanLyDiaDiem;
 using DuLich.GUI.QuanLyDoan;
+using DuLich.GUI.QuanLyDonHang;
 using DuLich.GUI.QuanLyKhach;
 using DuLich.GUI.QuanLyKhoHang;
 using DuLich.GUI.QuanLyNhanVien;
@@ -26,6 +27,8 @@ namespace DuLich
         private Product_Dal product_Dal = Product_Dal.getInstance();
         private Combo_Dal combo_Dal = Combo_Dal.getInstance();
         private Storage_Dal storage_Dal = Storage_Dal.getInstance();
+        private Invoice_Dal invoice_Dal = Invoice_Dal.getInstance();
+        private Customer_Dal customer_Dal = Customer_Dal.getInstance();
         public ManHinhChinh()
         {
             InitializeComponent();
@@ -50,6 +53,11 @@ namespace DuLich
         {
             panel_main_content.Controls.Clear();
             panel_main_content.Controls.Add(new DanhSachXuatNhap(storage_Dal.GetAll(),product_Dal.GetAll(), this));
+        }
+        private void showDanhSachDonHang()
+        {
+            panel_main_content.Controls.Clear();
+            panel_main_content.Controls.Add(new DanhSachDonHang(invoice_Dal.GetAll(), this));
         }
         private void showThongKe()
         {
@@ -172,6 +180,57 @@ namespace DuLich
         }
     }
 }
+
+/**
+ *  Quản lý Đơn Hàng
+ */
+
+namespace DuLich
+{
+    public partial class ManHinhChinh : DanhSachDonHang.IDanhSachDonHangListener,ChiTietDonHang.IChiTietDonHangListener
+    {
+        ChiTietDonHang chiTietDonHang;
+        private void btn_quanlydonhang_Click(object sender, EventArgs e)
+        {
+            showDanhSachDonHang();
+        }
+
+        public void onDanhSachDonHang_SuaClick(invoice invoice)
+        {
+            chiTietDonHang = new ChiTietDonHang(invoice, customer_Dal.GetAll(),this);
+            chiTietDonHang.ShowDialog();
+        }
+
+        public void onDanhSachDonHang_ThemClick()
+        {
+            invoice invoice = new invoice();
+            chiTietDonHang = new ChiTietDonHang(invoice, customer_Dal.GetAll(), this);
+            chiTietDonHang.ShowDialog();
+        }
+
+        public void onDanhSachDonHang_XoaClick(invoice invoice)
+        {
+        }
+        public void onLuuClick(invoice invoice)
+        {
+            invoice.AddOrUpdate().ContinueWith(task =>
+            {
+                panel_main_content.Invoke((MethodInvoker)delegate
+                {
+                    chiTietDonHang.Close();
+                    showDanhSachDonHang();
+                });
+
+            });
+        }
+
+        public void onHuyChiTietInvoiceClick()
+        {
+            chiTietDonHang.Close();
+        }
+    }
+}
+
 
 
 

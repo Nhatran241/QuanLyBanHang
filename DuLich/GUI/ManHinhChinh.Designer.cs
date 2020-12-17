@@ -102,7 +102,7 @@ namespace DuLich
             this.btn_quanlynhanvien.TabIndex = 11;
             this.btn_quanlynhanvien.Text = "Quản lý đơn hàng";
             this.btn_quanlynhanvien.UseVisualStyleBackColor = true;
-            this.btn_quanlynhanvien.Click += new System.EventHandler(this.btn_quanlynhanvien_Click);
+            this.btn_quanlynhanvien.Click += new System.EventHandler(this.btn_quanlydonhang_Click);
             // 
             // btn_thongke
             // 

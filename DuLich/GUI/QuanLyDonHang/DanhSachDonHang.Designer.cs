@@ -36,12 +36,11 @@ namespace DuLich.GUI.QuanLyDonHang
             this.components = new System.ComponentModel.Container();
             this.lv_combo = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.search1 = new TimKiemDonHang();
+            this.search1 = new DuLich.GUI.QuanLyDonHang.TimKiemDonHang();
             this.btn_xoa = new System.Windows.Forms.Button();
             this.btn_them = new System.Windows.Forms.Button();
             this.productBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -52,11 +51,10 @@ namespace DuLich.GUI.QuanLyDonHang
             ((System.ComponentModel.ISupportInitialize)(this.tourisBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
-            // lv_product
+            // lv_combo
             // 
             this.lv_combo.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
-            this.columnHeader2,
             this.columnHeader6,
             this.columnHeader8,
             this.columnHeader9,
@@ -65,7 +63,7 @@ namespace DuLich.GUI.QuanLyDonHang
             this.lv_combo.HideSelection = false;
             this.lv_combo.Location = new System.Drawing.Point(3, 103);
             this.lv_combo.MultiSelect = false;
-            this.lv_combo.Name = "lv_product";
+            this.lv_combo.Name = "lv_combo";
             this.lv_combo.Size = new System.Drawing.Size(794, 494);
             this.lv_combo.TabIndex = 4;
             this.lv_combo.UseCompatibleStateImageBehavior = false;
@@ -74,31 +72,27 @@ namespace DuLich.GUI.QuanLyDonHang
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "Mã combo";
-            this.columnHeader1.Width = 70;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Tên combo";
-            this.columnHeader2.Width = 200;
+            this.columnHeader1.Text = "Mã đơn hàng";
+            this.columnHeader1.Width = 100;
             // 
             // columnHeader6
             // 
-            this.columnHeader6.Text = "Thời gian tạo";
-            this.columnHeader6.Width = 100;
+            this.columnHeader6.Text = "Tên khách hàng";
+            this.columnHeader6.Width = 150;
             // 
             // columnHeader8
             // 
-            this.columnHeader8.Text = "Tổng giá gốc sản phẩm";
-            this.columnHeader8.Width = 150;
+            this.columnHeader8.Text = "Địa chỉ giao hàng";
+            this.columnHeader8.Width = 220;
             // 
             // columnHeader9
             // 
-            this.columnHeader9.Text = "Giảm giá";
+            this.columnHeader9.Text = "Tổng tiền";
+            this.columnHeader9.Width = 170;
             // 
             // columnHeader10
             // 
-            this.columnHeader10.Text = "Tổng giá sau giảm";
+            this.columnHeader10.Text = "Trạng thái đơn hàng";
             this.columnHeader10.Width = 150;
             // 
             // search1
@@ -146,7 +140,7 @@ namespace DuLich.GUI.QuanLyDonHang
             this.tourisBindingSource.DataSource = typeof(DuLich.BUS.Tour);
             this.tourisBindingSource.CurrentChanged += new System.EventHandler(this.tourisBindingSource_CurrentChanged);
             // 
-            // DanhSachCombo
+            // DanhSachDonHang
             // 
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.SystemColors.Control;
@@ -154,7 +148,7 @@ namespace DuLich.GUI.QuanLyDonHang
             this.Controls.Add(this.btn_xoa);
             this.Controls.Add(this.btn_them);
             this.Controls.Add(this.search1);
-            this.Name = "DanhSachCombo";
+            this.Name = "DanhSachDonHang";
             this.Size = new System.Drawing.Size(800, 600);
             ((System.ComponentModel.ISupportInitialize)(this.productBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tourBindingSource)).EndInit();
@@ -176,7 +170,6 @@ namespace DuLich.GUI.QuanLyDonHang
         private BindingSource productBindingSource;
         private ListView lv_combo;
         private ColumnHeader columnHeader1;
-        private ColumnHeader columnHeader2;
         private ColumnHeader columnHeader6;
         private ColumnHeader columnHeader8;
         private ColumnHeader columnHeader9;

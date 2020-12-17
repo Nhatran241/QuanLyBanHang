@@ -22,5 +22,19 @@ namespace DuLich.BanHang_Entity
             }
             return tong;
         }
+        public List<invoicedetail> GetListInvoiceDetails()
+        {
+            List<invoicedetail> invoices = new List<invoicedetail>();
+            if (invoicedetails == null)
+                return invoices;
+            foreach (invoicedetail detail in invoicedetails)
+            {
+                invoicedetail i = new invoicedetail();
+                i.Map(detail);
+                invoices.Add(i);
+            }
+            return invoices;
+
+        }
     }
 }

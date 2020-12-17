@@ -218,5 +218,10 @@ namespace DuLich.GUI.QuanLyCombo
             loadListProductInCombo();
             chonThietBi.Close();
         }
+
+        private void tb_tonggiasanpham_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

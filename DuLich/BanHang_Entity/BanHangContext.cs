@@ -132,6 +132,12 @@
                 .WithRequired(e => e.invoice)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<invoicedetail>()
+                .HasOptional(e => e.combo);
+
+            modelBuilder.Entity<invoicedetail>()
+                .HasOptional(e => e.product);
+
             modelBuilder.Entity<product>()
                 .HasMany(e => e.invoicedetails);
 

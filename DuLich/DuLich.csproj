@@ -63,6 +63,7 @@
     <Compile Include="BanHang_BUS\combo.cs" />
     <Compile Include="BanHang_BUS\product.cs" />
     <Compile Include="BanHang_BUS\storage.cs" />
+    <Compile Include="BanHang_DAL\Employee_Dal - Copy.cs" />
     <Compile Include="BanHang_DAL\Invoice_Dal.cs" />
     <Compile Include="BanHang_DAL\Storage_Dal.cs" />
     <Compile Include="BanHang_DAL\Employee_Dal.cs" />

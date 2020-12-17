@@ -14,16 +14,16 @@ namespace DuLich.GUI.QuanLyDonHang
         private long giaden = long.MaxValue;
         private DateTime ngaytu = new DateTime();
         private DateTime ngayden = new DateTime();
-        private ITimKiemCombo timKiemCombo;
+        private ITimKiemDonHang timKiemDonHang;
         private bool initDataCompleted = false;
 
         public TimKiemDonHang()
         {
             InitializeComponent();
         }
-        public void SetData(DateTime ngaytu,DateTime ngayden,long giatu,long giaden,ITimKiemCombo timKiemCombo)
+        public void SetData(DateTime ngaytu,DateTime ngayden,long giatu,long giaden,ITimKiemDonHang timKiemCombo)
         {
-            this.timKiemCombo = timKiemCombo;
+            this.timKiemDonHang = timKiemCombo;
             this.ngaytu = ngaytu;
             this.ngayden = ngayden;
             this.giatu = giatu;
@@ -49,13 +49,13 @@ namespace DuLich.GUI.QuanLyDonHang
         private void tb_search_TextChanged(object sender, EventArgs e)
         {
             filterTen = tb_search.Text.Trim().ToLower();
-            if(timKiemCombo != null)
-                timKiemCombo.onTimKiem(filterTen, giatu, giaden, ngaytu, ngayden);
+            if(timKiemDonHang != null)
+                timKiemDonHang.onTimKiem(giatu, giaden, ngaytu, ngayden);
         }
 
-        public interface ITimKiemCombo
+        public interface ITimKiemDonHang
         {
-            void onTimKiem(string ten,long giatu,long giaden,DateTime ngaytu,DateTime ngayden);
+            void onTimKiem(long giatu,long giaden,DateTime ngaytu,DateTime ngayden);
         }
 
         private void datepickbatdau_ValueChanged(object sender, EventArgs e)
@@ -64,7 +64,7 @@ namespace DuLich.GUI.QuanLyDonHang
                 return;
             if (datepickbatdau.Value >= datepickketthuc.Value)
                 datepickketthuc.Value = datepickbatdau.Value;
-            timKiemCombo.onTimKiem(filterTen,giatu,giaden, datepickbatdau.Value, datepickketthuc.Value) ;
+            timKiemDonHang.onTimKiem(giatu,giaden, datepickbatdau.Value, datepickketthuc.Value) ;
         }
 
         private void datepickketthuc_ValueChanged(object sender, EventArgs e)
@@ -73,7 +73,7 @@ namespace DuLich.GUI.QuanLyDonHang
                 return;
             if (datepickketthuc.Value < datepickbatdau.Value)
                 datepickbatdau.Value = datepickketthuc.Value;
-            timKiemCombo.onTimKiem(filterTen, giatu, giaden, datepickbatdau.Value, datepickketthuc.Value);
+            timKiemDonHang.onTimKiem(giatu, giaden, datepickbatdau.Value, datepickketthuc.Value);
         }
 
         private void tb_pricefrom_TextChanged(object sender, EventArgs e)
@@ -95,7 +95,7 @@ namespace DuLich.GUI.QuanLyDonHang
                 tb_pricefrom.Text = "0đ";
                 giatu = 0;
             }
-            timKiemCombo.onTimKiem(filterTen, giatu, giaden, datepickbatdau.Value, datepickketthuc.Value);
+            timKiemDonHang.onTimKiem(giatu, giaden, datepickbatdau.Value, datepickketthuc.Value);
      
         }
 
@@ -137,7 +137,7 @@ namespace DuLich.GUI.QuanLyDonHang
                 tb_priceto.Text = "0đ";
                 giaden = 0;
             }
-            timKiemCombo.onTimKiem(filterTen, giatu, giaden, datepickbatdau.Value, datepickketthuc.Value);
+            timKiemDonHang.onTimKiem(giatu, giaden, datepickbatdau.Value, datepickketthuc.Value);
         }
     }
 }

@@ -10,69 +10,73 @@ using DuLich.GUI.QuanLyTouris;
 namespace DuLich.GUI.QuanLyDonHang
 {
 
-    public partial class DanhSachDonHang : UserControl,TimKiemDonHang.ITimKiemCombo
+    public partial class DanhSachDonHang : UserControl,TimKiemDonHang.ITimKiemDonHang
     {
         private IDanhSachDonHangListener danhSachDonHangListener;
-        private List<combo> combo_list;
-        private List<product> product_list;
+        private List<invoice> invoice_list;
+        private List<String> trangthai = new List<string>();
 
         public DanhSachDonHang()
         {
             InitializeComponent();
         }
-        public DanhSachDonHang(List<combo> _combo_list,List<product> _product_list, IDanhSachDonHangListener danhSachDonHangListener)
+        public DanhSachDonHang(List<invoice> _invoice_list, IDanhSachDonHangListener danhSachDonHangListener)
         {
             InitializeComponent();
             this.danhSachDonHangListener = danhSachDonHangListener;
-            this.combo_list = _combo_list;
-            this.product_list = _product_list;
-            if(combo_list.Count > 0) 
+            this.invoice_list = _invoice_list;
+            trangthai.Add("Chờ xác nhận");
+            trangthai.Add("Đã xác nhận");
+            trangthai.Add("Chờ giao hàng");
+            trangthai.Add("Shipper đã nhận hàng");
+            trangthai.Add("Hoàn thành");
+            trangthai.Add("Hủy bỏ");
+            if (invoice_list.Count > 0) 
                 InitData();
         }
 
         private void InitData()
         {
-            DateTime ngaytu = combo_list.First().createtime;
-            DateTime ngayden = combo_list.First().createtime;
-            long giatu = combo_list.First().TotalPriceOfCombo();
-            long giaden = combo_list.First().TotalPriceOfCombo();
+            DateTime ngaytu = invoice_list.First().createddate;
+            DateTime ngayden = invoice_list.First().createddate;
+            long giatu = invoice_list.First().totalmoney;
+            long giaden = invoice_list.First().totalmoney;
 
-            foreach (combo combo in combo_list)
+            foreach (invoice invoice in invoice_list)
             {
-                if (combo.createtime < ngaytu)
-                    ngaytu = combo.createtime;
-                if (combo.createtime > ngayden)
-                    ngayden = combo.createtime;
-                if (combo.TotalPriceOfCombo() > giaden)
-                    giaden = combo.TotalPriceOfCombo();
-                if (combo.TotalPriceOfCombo() < giatu)
-                    giatu = combo.TotalPriceOfCombo();
+                if (invoice.createddate < ngaytu)
+                    ngaytu = invoice.createddate;
+                if (invoice.createddate > ngayden)
+                    ngayden = invoice.createddate;
+                if (invoice.totalmoney > giaden)
+                    giaden = invoice.totalmoney;
+                if (invoice.totalmoney < giatu)
+                    giatu = invoice.totalmoney;
                 ListViewItem item = new ListViewItem(new string[] {
-                   combo.id.ToString(),
-                   combo.combo_name,
-                   combo.createtime.ToString(),
-                   combo.TotalPriceOfProductsCombo().ToString("N0")+"đ",
-                   combo.discountpercent+"%",
-                   combo.TotalPriceOfCombo().ToString("N0")+"đ"
-                }, -1);;
+                   invoice.id.ToString(),
+                   invoice.customer.firstname + invoice.customer.lastname,
+                   invoice.customeraddress,
+                   invoice.totalmoney.ToString("N0")+"đ",
+                   trangthai.ToArray()[invoice.status]
+                }, -1);
                 lv_combo.Items.Add(item);
             } 
             search1.SetData(ngaytu,ngayden,giatu,giaden, this);
         }
 
-        private void initListViewData(List<combo> newlist)
+        private void initListViewData(List<invoice> invoices)
         {
             lv_combo.Items.Clear();
-            foreach (combo combo in newlist)
+            foreach (invoice invoice in invoices)
             {
                 ListViewItem item = new ListViewItem(new string[] {
-                   combo.id.ToString(),
-                   combo.combo_name,
-                   combo.createtime.ToString(),
-                   combo.TotalPriceOfProductsCombo().ToString("N0")+"đ",
-                   combo.discountpercent+"%",
-                   combo.TotalPriceOfCombo().ToString("N0")+"đ"
-                }, -1); ;
+                   invoice.id.ToString(),
+                   invoice.customer.firstname,
+                   invoice.customer.lastname,
+                   invoice.customeraddress,
+                   invoice.totalmoney.ToString("N0")+"đ",
+                   trangthai.ToArray()[invoice.status]
+                }, -1);
                 lv_combo.Items.Add(item);
             }
         }
@@ -96,7 +100,7 @@ namespace DuLich.GUI.QuanLyDonHang
             if (lv_combo.SelectedItems.Count <= 0)
                 return;
             int position = lv_combo.SelectedItems[0].Index;
-           // danhSachDonHangListener.onDanhSachDonHang_XoaClick(combo_list.ToList()[position]);
+           danhSachDonHangListener.onDanhSachDonHang_XoaClick(invoice_list.ToList()[position]);
         }
 
         private void tourisBindingSource_CurrentChanged(object sender, EventArgs e)
@@ -104,21 +108,11 @@ namespace DuLich.GUI.QuanLyDonHang
 
         }
 
-        public void onTimKiem(string ten, long giatu, long giaden, DateTime ngaytu, DateTime ngayden)
+        public void onTimKiem(long giatu, long giaden, DateTime ngaytu, DateTime ngayden)
         {
-            if (!ten.Equals(""))
-            {
-                    initListViewData(combo_list.Where(c => c.combo_name.ToLower().Contains(ten)
-                        && c.createtime >= ngaytu && c.createtime <=ngayden
-                        && c.TotalPriceOfCombo() >= giatu && c.TotalPriceOfCombo() <= giaden
+               initListViewData(invoice_list.Where(c => c.createddate >= ngaytu && c.createddate <= ngayden
+                        && c.totalmoney >= giatu && c.totalmoney <= giaden
                     ).ToList());
-            }
-            else
-            {
-               initListViewData(combo_list.Where(c => c.createtime >= ngaytu && c.createtime <= ngayden
-                        && c.TotalPriceOfCombo() >= giatu && c.TotalPriceOfCombo() <= giaden
-                    ).ToList());
-            }
         }
 
         private void lv_product_item_doubleclick(object sender, EventArgs e)
@@ -126,7 +120,7 @@ namespace DuLich.GUI.QuanLyDonHang
             if (lv_combo.SelectedItems.Count <= 0)
                 return;
             int position = lv_combo.SelectedItems[0].Index;
-            //danhSachComboListener.onDanhSachCombo_SuaClick(combo_list.ToList()[position]);
+            danhSachDonHangListener.onDanhSachDonHang_SuaClick(invoice_list.ToList()[position]);
 
         }
     }

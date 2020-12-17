@@ -29,5 +29,18 @@ namespace DuLich.BanHang_Entity
         public int status { get; set; }
         public virtual customer customer { get; set; }
         public virtual ICollection<invoicedetail> invoicedetails { get; set; }
+
+        public void Map(invoice invoice)
+        {
+            this.id = invoice.id;
+            this.createddate = invoice.createddate;
+            this.customer = invoice.customer;
+            this.customeraddress = invoice.customeraddress;
+            this.invoicedetails = invoice.invoicedetails;
+            this.invoice_name = invoice.invoice_name;
+            this.shipdate = invoice.shipdate;
+            this.status = invoice.status;
+            this.totalmoney = invoice.totalmoney;
+        }
     }
 }

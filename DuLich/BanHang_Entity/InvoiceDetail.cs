@@ -24,5 +24,15 @@ namespace DuLich.BanHang_Entity
         public virtual invoice invoice { get; set; }
 
         public virtual product product { get; set; }
+
+        public void Map(invoicedetail invoicedetail)
+        {
+            this.id = invoicedetail.id;
+            this.amount = invoicedetail.amount;
+            this.combo = invoicedetail.combo;
+            this.invoice = invoicedetail.invoice;
+            this.price = invoicedetail.price;
+            this.product = invoicedetail.product;
+        }
     }
 }

@@ -14,43 +14,52 @@ namespace DuLich.GUI.QuanLyDonHang
     {
         private bool isEditing = false;
         private product product;
+        private combo combo;
         private int soluong = 1;
         private IChonThietBiListener chonThietBiListener;
         private IThayDoiSoLuongListener thayDoiSoLuongListener;
-        private int maProductCombo;
-        public ChonThietBiHoacCombo(List<product> danhSachThietBiTrongCombo,IChonThietBiListener chonThietBiListener)
+        private int mainvoicedetail;
+        List<combo> danhSachCombo;
+        public ChonThietBiHoacCombo(List<product> danhSachThietBiTrongChiTiet,List<combo> danhSachComboTrongChiTiet,IChonThietBiListener chonThietBiListener)
         {
             InitializeComponent();
             this.chonThietBiListener = chonThietBiListener;
             List<product> danhSachThietBi = Product_Dal.getInstance().GetAll();
-            foreach(product product in danhSachThietBiTrongCombo)
+            danhSachCombo = Combo_Dal.getInstance().GetAll();
+            foreach (product product in danhSachThietBiTrongChiTiet)
             {
                 if (danhSachThietBi.Contains(product))
                     danhSachThietBi.Remove(product);
             }
+            foreach (combo combo in danhSachComboTrongChiTiet)
+            {
+                if (danhSachCombo.Contains(combo))
+                    danhSachCombo.Remove(combo);
+            }
             panel1.Controls.Clear();
             panel1.Controls.Add(new DanhSachThietBi(danhSachThietBi, Catalog_Dal.GetAll(), this));
         }
-        public ChonThietBiHoacCombo(int maComboProduct , product product , int soluong, IThayDoiSoLuongListener thayDoiSoLuongListener)
+        public ChonThietBiHoacCombo(int mainvoicedetail, product product,combo combo , int soluong, IThayDoiSoLuongListener thayDoiSoLuongListener)
         {
             InitializeComponent();
-            this.maProductCombo = maProductCombo;
             this.product = product;
+            this.combo = combo;
             this.soluong = soluong;
+            this.mainvoicedetail = mainvoicedetail;
             this.thayDoiSoLuongListener = thayDoiSoLuongListener;
             tb_soluong.Text = soluong.ToString();
-            tb_thietbidachon.Text = product.product_name;
+            tb_thietbidachon.Text = product != null ? product.product_name : combo.combo_name;
         }
 
 
         private void btn_luu_Click(object sender, EventArgs e)
         {
-            if (product != null) {
+            if (product != null || combo != null) {
                 if(chonThietBiListener != null)
-                    chonThietBiListener.onLuuClick(product, soluong);
+                    chonThietBiListener.onLuuClick(product, combo, soluong);
 
                 if (thayDoiSoLuongListener != null)
-                    thayDoiSoLuongListener.onLuuClick(maProductCombo,product, soluong);
+                    thayDoiSoLuongListener.onLuuThayDoiClick(mainvoicedetail, soluong);
             }
             else
             {
@@ -68,12 +77,12 @@ namespace DuLich.GUI.QuanLyDonHang
 
         public interface IChonThietBiListener
         {
-            void onLuuClick(product product,int soluong);
+            void onLuuClick(product product,combo combo,int soluong);
             void onHuyClick();
         }
         public interface IThayDoiSoLuongListener
         {
-            void onLuuClick(int maComboProduct ,product product, int soluong);
+            void onLuuThayDoiClick(int ma, int soluong);
             void onHuyClick();
         }
 

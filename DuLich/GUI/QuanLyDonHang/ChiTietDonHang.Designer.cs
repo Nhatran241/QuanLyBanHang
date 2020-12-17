@@ -29,36 +29,25 @@ namespace DuLich.GUI.QuanLyDonHang
         /// </summary>
         private void InitializeComponent()
         {
-            this.tb_tenthietbi = new System.Windows.Forms.TextBox();
             this.btn_luu = new System.Windows.Forms.Button();
             this.btn_huy = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.tb_giamgia = new System.Windows.Forms.TextBox();
-            this.lv_productincombo = new System.Windows.Forms.ListView();
+            this.lv_details = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btn_themsanpham = new System.Windows.Forms.Button();
             this.btn_xoasanpham = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btn_thaydoisoluong = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tb_giacombo = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tb_tonggiasanpham = new System.Windows.Forms.TextBox();
+            this.cb_customer = new System.Windows.Forms.ComboBox();
+            this.cb_status = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
-            // 
-            // tb_tenthietbi
-            // 
-            this.tb_tenthietbi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_tenthietbi.Location = new System.Drawing.Point(126, 6);
-            this.tb_tenthietbi.Name = "tb_tenthietbi";
-            this.tb_tenthietbi.Size = new System.Drawing.Size(192, 26);
-            this.tb_tenthietbi.TabIndex = 5;
-            this.tb_tenthietbi.TextChanged += new System.EventHandler(this.tb_tenthietbi_TextChanged);
             // 
             // btn_luu
             // 
@@ -88,9 +77,9 @@ namespace DuLich.GUI.QuanLyDonHang
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(12, 9);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(91, 20);
+            this.label2.Size = new System.Drawing.Size(94, 20);
             this.label2.TabIndex = 10;
-            this.label2.Text = "Tên Combo";
+            this.label2.Text = "Khách hàng";
             // 
             // label4
             // 
@@ -98,62 +87,52 @@ namespace DuLich.GUI.QuanLyDonHang
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(350, 9);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 20);
+            this.label4.Size = new System.Drawing.Size(80, 20);
             this.label4.TabIndex = 12;
-            this.label4.Text = "Giảm giá";
+            this.label4.Text = "Trạng thái";
             // 
-            // tb_giamgia
+            // lv_details
             // 
-            this.tb_giamgia.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_giamgia.Location = new System.Drawing.Point(442, 6);
-            this.tb_giamgia.MaxLength = 4;
-            this.tb_giamgia.Name = "tb_giamgia";
-            this.tb_giamgia.Size = new System.Drawing.Size(226, 26);
-            this.tb_giamgia.TabIndex = 17;
-            this.tb_giamgia.TextChanged += new System.EventHandler(this.tb_giamgia_TextChanged);
-            // 
-            // lv_productincombo
-            // 
-            this.lv_productincombo.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lv_details.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4,
-            this.columnHeader5});
-            this.lv_productincombo.FullRowSelect = true;
-            this.lv_productincombo.HideSelection = false;
-            this.lv_productincombo.Location = new System.Drawing.Point(12, 135);
-            this.lv_productincombo.MultiSelect = false;
-            this.lv_productincombo.Name = "lv_productincombo";
-            this.lv_productincombo.Size = new System.Drawing.Size(712, 318);
-            this.lv_productincombo.TabIndex = 19;
-            this.lv_productincombo.UseCompatibleStateImageBehavior = false;
-            this.lv_productincombo.View = System.Windows.Forms.View.Details;
+            this.columnHeader6});
+            this.lv_details.FullRowSelect = true;
+            this.lv_details.HideSelection = false;
+            this.lv_details.Location = new System.Drawing.Point(12, 135);
+            this.lv_details.MultiSelect = false;
+            this.lv_details.Name = "lv_details";
+            this.lv_details.Size = new System.Drawing.Size(712, 318);
+            this.lv_details.TabIndex = 19;
+            this.lv_details.UseCompatibleStateImageBehavior = false;
+            this.lv_details.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader1
             // 
-            this.columnHeader1.Text = "Mã sản phẩm";
+            this.columnHeader1.Text = "Mã chi tiết";
             this.columnHeader1.Width = 100;
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "Tên sản phẩm";
+            this.columnHeader2.Text = "Tên sản phẩm / Combo";
             this.columnHeader2.Width = 200;
             // 
             // columnHeader3
             // 
-            this.columnHeader3.Text = "Số lượng theo combo";
+            this.columnHeader3.Text = "Số lượng";
             this.columnHeader3.Width = 150;
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "Giá gốc";
+            this.columnHeader4.Text = "Đơn giá";
             this.columnHeader4.Width = 100;
             // 
-            // columnHeader5
+            // columnHeader6
             // 
-            this.columnHeader5.Text = "Tổng giá gốc";
-            this.columnHeader5.Width = 100;
+            this.columnHeader6.Text = "Tổng";
+            this.columnHeader6.Width = 100;
             // 
             // btn_themsanpham
             // 
@@ -162,7 +141,7 @@ namespace DuLich.GUI.QuanLyDonHang
             this.btn_themsanpham.Name = "btn_themsanpham";
             this.btn_themsanpham.Size = new System.Drawing.Size(161, 24);
             this.btn_themsanpham.TabIndex = 20;
-            this.btn_themsanpham.Text = "Thêm sản phẩm vào combo";
+            this.btn_themsanpham.Text = "Thêm chi tiết";
             this.btn_themsanpham.UseVisualStyleBackColor = true;
             this.btn_themsanpham.Click += new System.EventHandler(this.themSanPhamVaoComboClick);
             // 
@@ -173,7 +152,7 @@ namespace DuLich.GUI.QuanLyDonHang
             this.btn_xoasanpham.Name = "btn_xoasanpham";
             this.btn_xoasanpham.Size = new System.Drawing.Size(144, 24);
             this.btn_xoasanpham.TabIndex = 21;
-            this.btn_xoasanpham.Text = "Xóa sản phẩm khỏi combo";
+            this.btn_xoasanpham.Text = "Xóa chi tiết";
             this.btn_xoasanpham.UseVisualStyleBackColor = true;
             this.btn_xoasanpham.Click += new System.EventHandler(this.btn_xoaThietBiKhoiCombo);
             // 
@@ -183,9 +162,9 @@ namespace DuLich.GUI.QuanLyDonHang
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(12, 109);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(253, 20);
+            this.label1.Size = new System.Drawing.Size(210, 20);
             this.label1.TabIndex = 22;
-            this.label1.Text = "Danh sách sản phẩm trong combo";
+            this.label1.Text = "Danh Sách chi tiết đơn hàng";
             // 
             // btn_thaydoisoluong
             // 
@@ -198,67 +177,65 @@ namespace DuLich.GUI.QuanLyDonHang
             this.btn_thaydoisoluong.UseVisualStyleBackColor = true;
             this.btn_thaydoisoluong.Click += new System.EventHandler(this.btn_thaydoisoluong_Click);
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(364, 56);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(86, 20);
-            this.label3.TabIndex = 30;
-            this.label3.Text = "Giá combo";
-            // 
-            // tb_giacombo
-            // 
-            this.tb_giacombo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_giacombo.Location = new System.Drawing.Point(456, 53);
-            this.tb_giacombo.MaxLength = 4;
-            this.tb_giacombo.Name = "tb_giacombo";
-            this.tb_giacombo.ReadOnly = true;
-            this.tb_giacombo.Size = new System.Drawing.Size(212, 26);
-            this.tb_giacombo.TabIndex = 31;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(12, 56);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(144, 20);
+            this.label5.Size = new System.Drawing.Size(75, 20);
             this.label5.TabIndex = 32;
-            this.label5.Text = "Tổng giá sản phẩm";
+            this.label5.Text = "Tổng tiền";
             // 
             // tb_tonggiasanpham
             // 
             this.tb_tonggiasanpham.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_tonggiasanpham.Location = new System.Drawing.Point(162, 53);
+            this.tb_tonggiasanpham.Location = new System.Drawing.Point(126, 53);
             this.tb_tonggiasanpham.MaxLength = 4;
             this.tb_tonggiasanpham.Name = "tb_tonggiasanpham";
             this.tb_tonggiasanpham.ReadOnly = true;
             this.tb_tonggiasanpham.Size = new System.Drawing.Size(196, 26);
             this.tb_tonggiasanpham.TabIndex = 33;
+            this.tb_tonggiasanpham.TextChanged += new System.EventHandler(this.tb_tonggiasanpham_TextChanged);
             // 
-            // ChiTietCombo
+            // cb_customer
+            // 
+            this.cb_customer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_customer.FormattingEnabled = true;
+            this.cb_customer.Location = new System.Drawing.Point(126, 9);
+            this.cb_customer.Name = "cb_customer";
+            this.cb_customer.Size = new System.Drawing.Size(196, 21);
+            this.cb_customer.TabIndex = 34;
+            this.cb_customer.SelectedIndexChanged += new System.EventHandler(this.cb_customer_SelectedIndexChanged);
+            // 
+            // cb_status
+            // 
+            this.cb_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_status.FormattingEnabled = true;
+            this.cb_status.Location = new System.Drawing.Point(445, 8);
+            this.cb_status.Name = "cb_status";
+            this.cb_status.Size = new System.Drawing.Size(196, 21);
+            this.cb_status.TabIndex = 35;
+            // 
+            // ChiTietDonHang
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(736, 465);
+            this.Controls.Add(this.cb_status);
+            this.Controls.Add(this.cb_customer);
             this.Controls.Add(this.tb_tonggiasanpham);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.tb_giacombo);
-            this.Controls.Add(this.label3);
             this.Controls.Add(this.btn_thaydoisoluong);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_xoasanpham);
             this.Controls.Add(this.btn_themsanpham);
-            this.Controls.Add(this.lv_productincombo);
-            this.Controls.Add(this.tb_giamgia);
+            this.Controls.Add(this.lv_details);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_huy);
             this.Controls.Add(this.btn_luu);
-            this.Controls.Add(this.tb_tenthietbi);
-            this.Name = "ChiTietCombo";
+            this.Name = "ChiTietDonHang";
             this.Load += new System.EventHandler(this.ChiTietCombo_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -266,25 +243,23 @@ namespace DuLich.GUI.QuanLyDonHang
         }
 
         #endregion
-        private System.Windows.Forms.TextBox tb_tenthietbi;
         private System.Windows.Forms.Button btn_luu;
         private System.Windows.Forms.Button btn_huy;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox tb_giamgia;
-        private System.Windows.Forms.ListView lv_productincombo;
+        private System.Windows.Forms.ListView lv_details;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.Button btn_themsanpham;
         private System.Windows.Forms.Button btn_xoasanpham;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btn_thaydoisoluong;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tb_giacombo;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tb_tonggiasanpham;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ComboBox cb_customer;
+        private System.Windows.Forms.ComboBox cb_status;
     }
 }
