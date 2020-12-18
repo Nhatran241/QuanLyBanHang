@@ -13,6 +13,7 @@ namespace DuLich.GUI.QuanLyCombo
     public partial class DanhSachCombo : UserControl,TimKiemCombo.ITimKiemCombo
     {
         private IDanhSachComboListener danhSachComboListener;
+        private IDanhSachChonComboListener danhSachChonComboListener;
         private List<combo> combo_list;
 
         public DanhSachCombo()
@@ -25,6 +26,16 @@ namespace DuLich.GUI.QuanLyCombo
             this.danhSachComboListener = danhSachComboListener;
             this.combo_list = _combo_list;
             if(combo_list.Count > 0) 
+                InitData();
+        }
+        public DanhSachCombo(List<combo> _combo_list, IDanhSachChonComboListener danhSachChonComboListener)
+        {
+            InitializeComponent();
+            btn_them.Visible = false;
+            btn_xoa.Visible = false;
+            this.danhSachChonComboListener = danhSachChonComboListener;
+            this.combo_list = _combo_list;
+            if (combo_list.Count > 0)
                 InitData();
         }
 
@@ -81,6 +92,11 @@ namespace DuLich.GUI.QuanLyCombo
             void onDanhSachCombo_ThemClick();
             void onDanhSachCombo_XoaClick(combo combo);
         }
+        public interface IDanhSachChonComboListener
+        {
+            void onDanhSachCombo_DoubleClick(combo combo);
+        }
+
 
 
         private void btn_them_Click(object sender, EventArgs e)
@@ -124,7 +140,11 @@ namespace DuLich.GUI.QuanLyCombo
             if (lv_combo.SelectedItems.Count <= 0)
                 return;
             int position = lv_combo.SelectedItems[0].Index;
-            danhSachComboListener.onDanhSachCombo_SuaClick(combo_list.ToList()[position]);
+            if (danhSachComboListener != null)
+                danhSachComboListener.onDanhSachCombo_SuaClick(combo_list.ToList()[position]);
+            if (danhSachChonComboListener != null)
+                danhSachChonComboListener.onDanhSachCombo_DoubleClick(combo_list.ToList()[position]);
+
 
         }
     }

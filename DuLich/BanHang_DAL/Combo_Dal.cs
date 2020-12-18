@@ -14,6 +14,14 @@ namespace DuLich.BanHang_Dal
     {
         static BanHangContext context = BanHangContext.GetInstance();
 
+        public Task Delete(combo combo)
+        {
+            List<comboproducts> oldList = context.Comboproducts.Where(c => c.combo.id == combo.id).ToList();
+            context.Comboproducts.RemoveRange(oldList);
+            context.Comboes.Remove(combo);
+            return context.SaveChangesAsync();
+        }
+
         private static Combo_Dal instance;
         public static Combo_Dal getInstance()
         {
@@ -29,6 +37,8 @@ namespace DuLich.BanHang_Dal
 
         public Task AddOrUpdate(combo combo)
         {
+            List<comboproducts> oldList = context.Comboproducts.Where(c => c.combo.id == combo.id).ToList();
+            context.Comboproducts.RemoveRange(oldList);
             context.Comboes.AddOrUpdate(combo);
             return context.SaveChangesAsync();
         }

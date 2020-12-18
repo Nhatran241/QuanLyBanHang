@@ -198,5 +198,10 @@ namespace DuLich.GUI.QuanLyDonHang
         {
 
         }
+
+        private void cb_status_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tmpInvoice.status = cb_status.SelectedIndex;
+        }
     }
 }

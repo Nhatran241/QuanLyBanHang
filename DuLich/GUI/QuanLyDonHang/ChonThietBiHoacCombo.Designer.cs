@@ -36,6 +36,7 @@ namespace DuLich.GUI.QuanLyDonHang
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.tb_thietbidachon = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // btn_luu
@@ -63,9 +64,9 @@ namespace DuLich.GUI.QuanLyDonHang
             // tb_soluong
             // 
             this.tb_soluong.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_soluong.Location = new System.Drawing.Point(553, 394);
+            this.tb_soluong.Location = new System.Drawing.Point(606, 424);
             this.tb_soluong.Name = "tb_soluong";
-            this.tb_soluong.Size = new System.Drawing.Size(263, 26);
+            this.tb_soluong.Size = new System.Drawing.Size(210, 26);
             this.tb_soluong.TabIndex = 15;
             this.tb_soluong.TextChanged += new System.EventHandler(this.tb_soluong_TextChanged);
             // 
@@ -73,7 +74,7 @@ namespace DuLich.GUI.QuanLyDonHang
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(428, 397);
+            this.label1.Location = new System.Drawing.Point(470, 424);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(119, 20);
             this.label1.TabIndex = 17;
@@ -81,9 +82,10 @@ namespace DuLich.GUI.QuanLyDonHang
             // 
             // panel1
             // 
+            this.panel1.AutoScroll = true;
             this.panel1.Location = new System.Drawing.Point(16, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(800, 376);
+            this.panel1.Size = new System.Drawing.Size(800, 200);
             this.panel1.TabIndex = 18;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
@@ -91,26 +93,35 @@ namespace DuLich.GUI.QuanLyDonHang
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 400);
+            this.label2.Location = new System.Drawing.Point(13, 424);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(129, 20);
+            this.label2.Size = new System.Drawing.Size(220, 20);
             this.label2.TabIndex = 19;
-            this.label2.Text = "Thiết bị đã chọn :";
+            this.label2.Text = "Thiết bị hoặc combo đã chọn :";
             // 
             // tb_thietbidachon
             // 
             this.tb_thietbidachon.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_thietbidachon.Location = new System.Drawing.Point(147, 397);
+            this.tb_thietbidachon.Location = new System.Drawing.Point(239, 424);
             this.tb_thietbidachon.Name = "tb_thietbidachon";
             this.tb_thietbidachon.ReadOnly = true;
-            this.tb_thietbidachon.Size = new System.Drawing.Size(263, 26);
+            this.tb_thietbidachon.Size = new System.Drawing.Size(216, 26);
             this.tb_thietbidachon.TabIndex = 20;
             // 
-            // ChonThietBi
+            // panel2
+            // 
+            this.panel2.AutoScroll = true;
+            this.panel2.Location = new System.Drawing.Point(16, 218);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(800, 200);
+            this.panel2.TabIndex = 19;
+            // 
+            // ChonThietBiHoacCombo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(886, 434);
+            this.ClientSize = new System.Drawing.Size(894, 465);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.tb_thietbidachon);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
@@ -118,7 +129,7 @@ namespace DuLich.GUI.QuanLyDonHang
             this.Controls.Add(this.tb_soluong);
             this.Controls.Add(this.btn_huy);
             this.Controls.Add(this.btn_luu);
-            this.Name = "ChonThietBi";
+            this.Name = "ChonThietBiHoacCombo";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -132,5 +143,6 @@ namespace DuLich.GUI.QuanLyDonHang
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox tb_thietbidachon;
+        private System.Windows.Forms.Panel panel2;
     }
 }

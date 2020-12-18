@@ -10,6 +10,10 @@ namespace DuLich.BanHang_Entity
         {
             return Invoice_Dal.getInstance().AddOrUpdate(this);
         }
+        public Task Delete()
+        {
+            return Invoice_Dal.getInstance().Delete(this);
+        }
 
         public long TotalMoney()
         {

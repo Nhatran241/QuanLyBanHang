@@ -9,7 +9,7 @@ namespace DuLich.GUI.QuanLyKhoHang
 {
     public partial class TimKiemKhoHang : UserControl
     {
-        private List<product> Products = new List<product>();
+        private List<product> products = new List<product>();
         private product filterProduct = new product();
         private employee filterEmployee = new employee();
         private long soluongtu = 0;
@@ -26,7 +26,7 @@ namespace DuLich.GUI.QuanLyKhoHang
         public void SetData(List<product> products,DateTime ngaytu,DateTime ngayden,long soluongtu,long soluongden,ITimKiemKhoHangListener timKiemKhoHangListener)
         {
             this.timKiemKhoHangListener = timKiemKhoHangListener;
-            this.Products.AddRange(products);
+            this.products.AddRange(products);
             this.ngaytu = ngaytu;
             this.ngayden = ngayden;
             this.soluongtu = Math.Abs(soluongtu);
@@ -37,13 +37,13 @@ namespace DuLich.GUI.QuanLyKhoHang
             this.soluongtu = 0;
             filterProduct.id = -1;
             filterProduct.product_name = "Bất kỳ";
-            this.Products.Insert(0, filterProduct);
+            this.products.Insert(0, filterProduct);
             InitData();
         }
 
         private void InitData()
         {
-            foreach(product product in Products)
+            foreach(product product in products)
             {
                 cb_search.Items.Add(product);
             }
@@ -63,7 +63,7 @@ namespace DuLich.GUI.QuanLyKhoHang
 
         private void cb_search_SelectedIndexChanged(object sender, EventArgs e)
         {
-            filterProduct = Products[cb_search.SelectedIndex];
+            filterProduct = products[cb_search.SelectedIndex];
             timKiemKhoHangListener.onTimKiem(filterProduct,soluongtu,soluongden,ngaytu,ngayden,checkBox1.Checked,checkBox2.Checked);
         }
 
@@ -145,12 +145,14 @@ namespace DuLich.GUI.QuanLyKhoHang
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)
         {
-            timKiemKhoHangListener.onTimKiem(filterProduct, soluongtu, soluongden, datepickbatdau.Value, datepickketthuc.Value, checkBox1.Checked, checkBox2.Checked);
+            if(timKiemKhoHangListener != null)
+                timKiemKhoHangListener.onTimKiem(filterProduct, soluongtu, soluongden, datepickbatdau.Value, datepickketthuc.Value, checkBox1.Checked, checkBox2.Checked);
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            timKiemKhoHangListener.onTimKiem(filterProduct, soluongtu, soluongden, datepickbatdau.Value, datepickketthuc.Value, checkBox1.Checked, checkBox2.Checked);
+            if (timKiemKhoHangListener != null)
+                timKiemKhoHangListener.onTimKiem(filterProduct, soluongtu, soluongden, datepickbatdau.Value, datepickketthuc.Value, checkBox1.Checked, checkBox2.Checked);
 
         }
     }

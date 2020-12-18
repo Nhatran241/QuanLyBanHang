@@ -14,7 +14,10 @@ namespace DuLich.BanHang_Entity
         {
             return Product_Dal.getInstance().AddOrUpdate(this);
         }
-
+        public Task Delete()
+        {
+            return Product_Dal.getInstance().Delete(this);
+        }
         public long PriceAfterDiscount()
         {
             return (price - (price * discountpercent) / 100);

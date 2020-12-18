@@ -58,7 +58,7 @@ namespace DuLich.GUI.QuanLyThietBi
                 chiTietThietBiListener.onLuuClick(product);
             }else
             {
-                MessageBox.Show("Tên thiết bị không được bỏ trống");
+                MessageBox.Show("Vui lòng nhập đủ thông tin");
             }
         }
 
@@ -68,7 +68,7 @@ namespace DuLich.GUI.QuanLyThietBi
         }
         private bool Validation(product product)
         {
-            if (string.IsNullOrEmpty(product.product_name) || product.catalog == null)
+            if (string.IsNullOrEmpty(product.product_name) || product.catalog == null || string.IsNullOrEmpty(product.detail))
                 return false;
             return true;
         }

@@ -21,6 +21,13 @@ namespace DuLich.BanHang_Dal
             return instance;
 
         }
+
+        public Task Delete(product product)
+        {
+            context.Products.Remove(product);
+            return context.SaveChangesAsync();
+        }
+
         public List<product> GetAll()
         {
             return context.Products.ToList();

@@ -57,5 +57,7 @@ namespace DuLich.BanHang_Entity
         {
             return product_name;
         }
+
+       
     }
 }

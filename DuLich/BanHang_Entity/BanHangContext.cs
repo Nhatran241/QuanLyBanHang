@@ -104,6 +104,7 @@
 
         public virtual DbSet<catalog> Catalogs { get; set; }
         public virtual DbSet<combo> Comboes { get; set; }
+        public virtual DbSet<comboproducts> Comboproducts { get; set; }
         public virtual DbSet<customer> Customers { get; set; }
         public virtual DbSet<employee> Employees { get; set; }
         public virtual DbSet<invoice> Invoices { get; set; }

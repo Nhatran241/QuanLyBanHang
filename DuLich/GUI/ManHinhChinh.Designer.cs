@@ -85,18 +85,19 @@ namespace DuLich
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(11, 236);
+            this.button2.Location = new System.Drawing.Point(12, 430);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(165, 32);
             this.button2.TabIndex = 9;
             this.button2.Text = "Quản lý nhân viên";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btn_quanlynhanvien
             // 
             this.btn_quanlynhanvien.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_quanlynhanvien.Location = new System.Drawing.Point(11, 296);
+            this.btn_quanlynhanvien.Location = new System.Drawing.Point(12, 244);
             this.btn_quanlynhanvien.Name = "btn_quanlynhanvien";
             this.btn_quanlynhanvien.Size = new System.Drawing.Size(165, 32);
             this.btn_quanlynhanvien.TabIndex = 11;
@@ -107,7 +108,7 @@ namespace DuLich
             // btn_thongke
             // 
             this.btn_thongke.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_thongke.Location = new System.Drawing.Point(12, 355);
+            this.btn_thongke.Location = new System.Drawing.Point(12, 312);
             this.btn_thongke.Name = "btn_thongke";
             this.btn_thongke.Size = new System.Drawing.Size(165, 33);
             this.btn_thongke.TabIndex = 12;

@@ -11,10 +11,12 @@ namespace DuLich.GUI.ThongKe
     public partial class ThongKe : UserControl
     {
         private List<product> danhSachThietBi;
-        public ThongKe(List<product> danhSachThietBi)
+        private List<invoice> danhSachInvoice;
+        public ThongKe(List<product> danhSachThietBi,List<invoice> danhSachInvoice)
         {
             InitializeComponent();
             this.danhSachThietBi = danhSachThietBi;
+            this.danhSachInvoice = danhSachInvoice;
             InitData();
         }
 
@@ -38,6 +40,26 @@ namespace DuLich.GUI.ThongKe
             }
         }
 
+        private void InitThongKeDonHang(List<invoice> invoices)
+        {
+            listview_thongkedonhang.Items.Clear();
+            int countItem = 0;
+            long total = 0;
+            foreach (invoice invoice in invoices.Where(c => c.createddate.Day >= datepicker_tu_doanhthutour.Value.Day && c.createddate.Day <= datepicker_den_doanhthutour.Value.Day))
+            {
+                countItem += invoice.invoicedetails.Count();
+                total += invoice.totalmoney;
+                ListViewItem listViewItem1 = new ListViewItem(new string[] {
+                    invoice.id.ToString(),
+                    invoice.invoicedetails.Count().ToString(),
+                    invoice.totalmoney.ToString("N0")+"đ"
+                }, -1);
+                listview_thongkedonhang.Items.Add(listViewItem1);
+            }
+            tv_tongdonhang.Text = invoices.Count().ToString();
+            tv_tongtien.Text = total.ToString("N0") + "đ";
+        }
+
 
         private void InitData()
         {
@@ -54,7 +76,7 @@ namespace DuLich.GUI.ThongKe
                         min = product.createtime;
                 }
                 comboBox1.DataSource = danhSachThietBi;
-                tonkhotu.MinDate = min;
+;                tonkhotu.MinDate = min;
                 tonkhotu.MaxDate = DateTime.Now;
                 tonkhoden.MinDate = min;
                 tonkhoden.MaxDate = DateTime.Now;
@@ -107,11 +129,13 @@ namespace DuLich.GUI.ThongKe
         {
             if (datepicker_tu_doanhthutour.Value > datepicker_den_doanhthutour.Value)
                 datepicker_den_doanhthutour.Value = datepicker_tu_doanhthutour.Value;
+            InitThongKeDonHang(danhSachInvoice);
         }
         private void datepicker_den_doanhthutour_ValueChanged_1(object sender, EventArgs e)
         {
             if (datepicker_den_doanhthutour.Value < datepicker_tu_doanhthutour.Value)
                 datepicker_tu_doanhthutour.Value = datepicker_den_doanhthutour.Value;
+            InitThongKeDonHang(danhSachInvoice);
         }
 
         private void ThongKe_Load(object sender, EventArgs e)

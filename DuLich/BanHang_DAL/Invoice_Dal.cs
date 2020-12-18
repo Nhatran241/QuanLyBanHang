@@ -14,6 +14,12 @@ namespace DuLich.BanHang_Dal
     {
         static BanHangContext context = BanHangContext.GetInstance();
 
+        public Task Delete(invoice invoice)
+        {
+            context.Invoices.Remove(invoice);
+            return context.SaveChangesAsync();
+        }
+
         private static Invoice_Dal instance;
         public static Invoice_Dal getInstance()
         {
@@ -29,6 +35,8 @@ namespace DuLich.BanHang_Dal
 
         public Task AddOrUpdate(invoice invoice)
         {
+            List<invoicedetail> oldList = context.InvoiceDetails.Where(c => c.invoice.id == invoice.id).ToList();
+            context.InvoiceDetails.RemoveRange(oldList);
             context.Invoices.AddOrUpdate(invoice);
             return context.SaveChangesAsync();
         }

@@ -216,6 +216,7 @@ namespace DuLich.GUI.QuanLyDonHang
             this.cb_status.Name = "cb_status";
             this.cb_status.Size = new System.Drawing.Size(196, 21);
             this.cb_status.TabIndex = 35;
+            this.cb_status.SelectedIndexChanged += new System.EventHandler(this.cb_status_SelectedIndexChanged);
             // 
             // ChiTietDonHang
             // 

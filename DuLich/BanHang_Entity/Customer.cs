@@ -45,5 +45,10 @@ namespace DuLich.BanHang_Entity
         public bool isnew { get; set; }
 
         public virtual ICollection<invoice> invoices { get; set; }
+
+        public override string ToString()
+        {
+            return firstname +" "+ lastname;
+        }
     }
 }

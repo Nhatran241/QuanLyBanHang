@@ -62,7 +62,7 @@ namespace DuLich
         private void showThongKe()
         {
             panel_main_content.Controls.Clear();
-            panel_main_content.Controls.Add(new ThongKe(product_Dal.GetAll()));
+            panel_main_content.Controls.Add(new ThongKe(product_Dal.GetAll(),invoice_Dal.GetAll()));
         }
 
 
@@ -104,6 +104,17 @@ namespace DuLich
                 if(product.comboproducts != null && product.comboproducts.Count >0 || product.storage != null && product.storage.Count > 0)
                 {
                     DialogResult kq = MessageBox.Show("Không thể xóa thiết bị này vì thiết bị đang thuộc combo hoặc đơn hàng khác", "", MessageBoxButtons.YesNo);
+                }
+                else
+                {
+                    product.Delete().ContinueWith(task =>
+                    {
+                        panel_main_content.Invoke((MethodInvoker)delegate
+                        {
+                            ShowDanhSachThietBi();
+                        });
+
+                    });
                 }
 
             }
@@ -158,7 +169,28 @@ namespace DuLich
 
         public void onDanhSachCombo_XoaClick(combo combo)
         {
-            
+            DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn xóa combo này ", "", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                if (combo.invoicedetails != null && combo.invoicedetails.Count > 0 )
+                {
+                    DialogResult kq = MessageBox.Show("Không thể xóa combo này vì combo đang được sử dụng", "", MessageBoxButtons.YesNo);
+                }
+                else
+                {
+                    combo.Delete().ContinueWith(task =>
+                    {
+                        panel_main_content.Invoke((MethodInvoker)delegate
+                        {
+                            ShowDanhSachCombo();
+                        });
+
+                    });
+                }
+
+
+
+            }
         }
 
         public void onLuuClick(combo combo)
@@ -210,6 +242,18 @@ namespace DuLich
 
         public void onDanhSachDonHang_XoaClick(invoice invoice)
         {
+            DialogResult dialogResult = MessageBox.Show("Bạn có chắc muốn xóa đơn hàng này ", "", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                    invoice.Delete().ContinueWith(task =>
+                    {
+                        panel_main_content.Invoke((MethodInvoker)delegate
+                        {
+                            showDanhSachDonHang();
+                        });
+
+                    });
+            }
         }
         public void onLuuClick(invoice invoice)
         {

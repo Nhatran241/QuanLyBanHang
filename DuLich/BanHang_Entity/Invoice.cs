@@ -5,6 +5,7 @@ namespace DuLich.BanHang_Entity
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Threading.Tasks;
 
     [Table("invoice")]
     public partial class invoice
@@ -42,5 +43,7 @@ namespace DuLich.BanHang_Entity
             this.status = invoice.status;
             this.totalmoney = invoice.totalmoney;
         }
+
+     
     }
 }

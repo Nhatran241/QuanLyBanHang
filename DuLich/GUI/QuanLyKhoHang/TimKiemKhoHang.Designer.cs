@@ -59,9 +59,9 @@ namespace DuLich.GUI.QuanLyKhoHang
             this.tv_combo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tv_combo.Location = new System.Drawing.Point(3, 9);
             this.tv_combo.Name = "tv_combo";
-            this.tv_combo.Size = new System.Drawing.Size(69, 16);
+            this.tv_combo.Size = new System.Drawing.Size(52, 16);
             this.tv_combo.TabIndex = 2;
-            this.tv_combo.Text = "Sản phẩm";
+            this.tv_combo.Text = "Thiết bị";
             // 
             // label1
             // 

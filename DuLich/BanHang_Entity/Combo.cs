@@ -5,6 +5,7 @@ namespace DuLich.BanHang_Entity
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Threading.Tasks;
 
     [Table("combo")]
     public partial class combo
@@ -40,5 +41,7 @@ namespace DuLich.BanHang_Entity
             this.createtime = combo.createtime;
             this.invoicedetails = combo.invoicedetails;
         }
+
+       
     }
 }

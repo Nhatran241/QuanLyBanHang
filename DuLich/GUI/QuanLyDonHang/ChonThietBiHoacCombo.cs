@@ -6,11 +6,12 @@ using System.Windows.Forms;
 using DuLich.BanHang_Dal;
 using DuLich.BanHang_Entity;
 using DuLich.BUS;
+using DuLich.GUI.QuanLyCombo;
 using DuLich.GUI.QuanLyThietBi;
 
 namespace DuLich.GUI.QuanLyDonHang
 {
-    public partial class ChonThietBiHoacCombo : Form,DanhSachThietBi.IDanhSachThietBiChonThietBiListener
+    public partial class ChonThietBiHoacCombo : Form,DanhSachThietBi.IDanhSachThietBiChonThietBiListener,DanhSachCombo.IDanhSachChonComboListener
     {
         private bool isEditing = false;
         private product product;
@@ -38,6 +39,8 @@ namespace DuLich.GUI.QuanLyDonHang
             }
             panel1.Controls.Clear();
             panel1.Controls.Add(new DanhSachThietBi(danhSachThietBi, Catalog_Dal.GetAll(), this));
+            panel2.Controls.Clear();
+            panel2.Controls.Add(new DanhSachCombo(danhSachCombo, this));
         }
         public ChonThietBiHoacCombo(int mainvoicedetail, product product,combo combo , int soluong, IThayDoiSoLuongListener thayDoiSoLuongListener)
         {
@@ -120,6 +123,7 @@ namespace DuLich.GUI.QuanLyDonHang
 
         public void onDanhSachThietBi_DoubleClick(product product)
         {
+            this.combo = null;
             this.product = product;
             tb_thietbidachon.Text = product.product_name;
             tb_soluong.Text = "1";
@@ -128,6 +132,14 @@ namespace DuLich.GUI.QuanLyDonHang
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        public void onDanhSachCombo_DoubleClick(combo combo)
+        {
+            this.combo = combo;
+            this.product = null;
+            tb_thietbidachon.Text = combo.combo_name;
+            tb_soluong.Text = "1";
         }
     }
 }

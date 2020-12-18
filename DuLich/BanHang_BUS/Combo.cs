@@ -10,6 +10,10 @@ namespace DuLich.BanHang_Entity
         {
             return Combo_Dal.getInstance().AddOrUpdate(this);
         }
+        public Task Delete()
+        {
+            return Combo_Dal.getInstance().Delete(this);
+        }
 
         public long TotalPriceOfProductsCombo()
         {
